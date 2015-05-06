@@ -2,32 +2,27 @@
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 
 /**
- * @Document(referenceable=true)
+ * @PHPCR\Document(referenceable=true)
  */
-class Service implements PrefixInterface, HierarchyInterface
+class Service extends BaseDocument
 {
     /**
-     * @Id(strategy="UUID")
-     * @var string
-     **/
-	private $id;
-
-    /**
-     * @String
+     * @PHPCR\String
      * @var string
      **/
 	private $serviceName;
 
     /**
-     * @String
+     * @PHPCR\String
      * @var string
      **/
 	private $className;
 
     /**
-     * @Referrers(referringDocument="Method", referencedBy="service")
+     * @PHPCR\Referrers(referringDocument="Method", referencedBy="service")
      * @var ArrayCollection<Method>
      **/
 	private $methods;
@@ -37,14 +32,6 @@ class Service implements PrefixInterface, HierarchyInterface
     {
         $this->methods = new ArrayCollection();
     }
-
-	/**
-	 * @return string
-	 */
-	public function getId()
-	{
-		return $this->id;
-	}
 
 	/**
 	 * @return string

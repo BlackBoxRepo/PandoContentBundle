@@ -2,38 +2,33 @@
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 
 /**
- * @Document(referenceable=true)
+ * @PHPCR\Document(referenceable=true)
  */
-class Form implements PrefixInterface, HierarchyInterface
+class Form extends BaseDocument
 {
     /**
-     * @Id(strategy="UUID")
-     * @var string
-     **/
-    private $id;
-
-    /**
-     * @String
+     * @PHPCR\String
      * @var string
      **/
     private $name;
 
     /**
-     * @ReferenceOne(targetDocument="Page", strategy="hard")
+     * @PHPCR\ReferenceOne(targetDocument="Page", strategy="hard")
      * @var Page
      **/
 	private $successPage;
 
     /**
-     * @ReferenceOne(targetDocument="Page", strategy="hard")
+     * @PHPCR\ReferenceOne(targetDocument="Page", strategy="hard")
      * @var Page
      **/
 	private $failurePage;
 
     /**
-     * @Referrers(referringDocument="FormBlockMethod", referencedBy="form")
+     * @PHPCR\Referrers(referringDocument="FormBlockMethod", referencedBy="form")
      * @var ArrayCollection<FormBlockMethod>
      **/
     private $formBlockMethods;
@@ -43,14 +38,6 @@ class Form implements PrefixInterface, HierarchyInterface
     {
         $this->formBlockMethods = new ArrayCollection();
     }
-
-	/**
-	 * @return string
-	 */
-	public function getId()
-	{
-		return $this->id;
-	}
 
 	/**
 	 * @return string

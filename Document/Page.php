@@ -2,26 +2,28 @@
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page as BasePage;
 
 /**
- * @Document(referenceable=true)
+ * @PHPCR\Document(referenceable=true)
  */
 class Page extends BasePage
 {
     /**
-     * @Id(strategy="UUID")
+     * @PHPCR\Id
      * @var string
      **/
 	private $id;
 
     /**
-     * @String
+     * @PHPCR\String
      * @var string
      **/
 	private $name;
 
 	/**
-     * @ReferenceMany(targetDocument="Block", strategy="hard")
+     * @PHPCR\ReferenceMany(targetDocument="Block", strategy="hard")
      * @var ArrayCollection<Block>
      **/
 	private $blocks;

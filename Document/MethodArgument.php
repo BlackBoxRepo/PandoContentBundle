@@ -1,49 +1,37 @@
 <?php
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Document;
 
+use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+
 /**
- * @Document(referenceable=true)
+ * @PHPCR\Document(referenceable=true)
  */
-class MethodArgument implements PrefixInterface, HierarchyInterface
+class MethodArgument extends BaseDocument
 {
     /**
-     * @Id(strategy="UUID")
-     * @var string
-     **/
-	private $id;
-
-    /**
-     * @Integer
+     * @PHPCR\Integer
      * @var integer
      **/
 	private $argumentOrder;
 
     /**
-     * @String
+     * @PHPCR\String
      * @var string
      **/
     private $value;
 
     /**
-     * @ReferenceOne(targetDocument="Method", strategy="hard")
+     * @PHPCR\ReferenceOne(targetDocument="Method", strategy="hard")
      * @var Method
      **/
 	private $method;
 
     /**
-     * @ReferenceOne(targetDocument="Method", strategy="hard")
+     * @PHPCR\ReferenceOne(targetDocument="Method", strategy="hard")
      * @var Method
      **/
 	private $callback;
 
-
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @return int

@@ -1,43 +1,31 @@
 <?php
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Document;
 
+use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+
 /**
- * @Document(referenceable=true)
+ * @PHPCR\Document(referenceable=true)
  */
-class BlockVariable implements PrefixInterface, HierarchyInterface
+class BlockVariable extends BaseDocument
 {
     /**
-     * @Id(strategy="UUID")
-     * @var string
-     **/
-    private $id;
-
-    /**
-     * @String
+     * @PHPCR\String
      * @var string
      **/
     private $name;
 
 	/**
-     * @ReferenceOne(targetDocument="Block", strategy="hard")
+     * @PHPCR\ReferenceOne(targetDocument="Block", strategy="hard")
      * @var Block
      **/
 	private $block;
 
     /**
-     * @ReferenceOne(targetDocument="Method", strategy="hard")
+     * @PHPCR\ReferenceOne(targetDocument="Method", strategy="hard")
      * @var Method
      **/
 	private $method;
 
-
-	/**
-	 * @return string
-	 */
-	public function getId()
-	{
-		return $this->id;
-	}
 
 	/**
 	 * @return string

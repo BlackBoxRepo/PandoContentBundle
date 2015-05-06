@@ -2,32 +2,34 @@
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\AbstractBlock;
 
 /**
- * @Document(referenceable=true)
+ * @PHPCR\Document(referenceable=true)
  */
 class Block extends AbstractBlock
 {
 	/**
-     * @Id(strategy="UUID")
+     * @PHPCR\Id
      * @var string
      **/
 	private $id;
 
 	/**
-     * @String
+     * @PHPCR\String
      * @var string
      **/
 	private $name;
 
 	/**
-     * @Referrers(referringDocument="BlockVariable", referencedBy="block")
+     * @PHPCR\Referrers(referringDocument="BlockVariable", referencedBy="block")
      * @var ArrayCollection<BlockVariable>
      **/
 	private $variables;
 
 	/**
-     * @Referrers(referringDocument="FormBlockMethod", referencedBy="block")
+     * @PHPCR\Referrers(referringDocument="FormBlockMethod", referencedBy="block")
      * @var ArrayCollection<FormBlockMethod>
      **/
 	private $formBlockMethods;
@@ -38,6 +40,11 @@ class Block extends AbstractBlock
 		$this->variables = new ArrayCollection();
 		$this->formBlockMethods = new ArrayCollection();
 	}
+
+    public function getType()
+    {
+        return 'pando_content_bundle.block.dynamic';
+    }
 
 	/**
 	 * @return string
