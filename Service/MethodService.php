@@ -21,6 +21,7 @@ class MethodService
      * Executes the passed in method via the associated service that's retrieved from the container.
      * This gets called recursively to supply all the arguments for each given method.
      *
+     * @param Method $method
      * @return mixed
      */
     public function call(Method $method)
