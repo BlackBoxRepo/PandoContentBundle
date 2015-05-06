@@ -1,1 +1,8 @@
+parameters:
+    pando_content_bundle.service.method.class: BlackBoxCode\Pando\Bundle\ContentBundle\Service\MethodService
+
 services:
+    pando_content_bundle.method_service:
+        class: "%pando_content_bundle.service.method.class%"
+        arguments:
+            - @service_container
