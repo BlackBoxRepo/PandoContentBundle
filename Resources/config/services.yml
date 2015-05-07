@@ -1,8 +1,13 @@
 parameters:
     pando_content_bundle.service.method.class: BlackBoxCode\Pando\Bundle\ContentBundle\Service\MethodService
+    pando_content_bundle.service.form_block_container.class: BlackBoxCode\Pando\Bundle\ContentBundle\Service\FormBlockContainerService
 
 services:
     pando_content_bundle.method_service:
         class: "%pando_content_bundle.service.method.class%"
         calls:
             - ['setContainer', [@service_container]]
+
+    pando_content_bundle.form_block_container_service:
+        class: "%pando_content_bundle.service.form_block_container.class%"
+        scope: request
