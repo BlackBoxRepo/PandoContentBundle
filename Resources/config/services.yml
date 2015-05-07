@@ -4,5 +4,5 @@ parameters:
 services:
     pando_content_bundle.method_service:
         class: "%pando_content_bundle.service.method.class%"
-        arguments:
-            - @service_container
+        calls:
+            - ['setContainer', [@service_container]]
