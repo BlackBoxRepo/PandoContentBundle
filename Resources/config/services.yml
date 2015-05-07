@@ -1,6 +1,7 @@
 parameters:
     pando_content_bundle.service.method.class: BlackBoxCode\Pando\Bundle\ContentBundle\Service\MethodService
     pando_content_bundle.service.form_block_container.class: BlackBoxCode\Pando\Bundle\ContentBundle\Service\FormBlockContainerService
+    pando_content_bundle.service.block_variable.class: BlackBoxCode\Pando\Bundle\ContentBundle\Service\BlockVariableService
 
 services:
     pando_content_bundle.method_service:
@@ -11,3 +12,10 @@ services:
     pando_content_bundle.form_block_container_service:
         class: "%pando_content_bundle.service.form_block_container.class%"
         scope: request
+
+    pando_content_bundle.block_variable_service:
+        class: "@pando_content_bundle.service.block_variable.class%"
+        calls:
+            - ['setEventDispatcher', [@event_dispatcher]]
+            - ['setMethodService', [@pando_content_bundle.method_service]]
+            - ['setFormBlockContainerService', [@pando_content_bundle.form_block_container_service]]
