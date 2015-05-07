@@ -76,7 +76,15 @@ class Method extends BaseDocument
      */
     public function getArguments()
     {
-        return $this->arguments;
+        $iterator = $this->arguments->getIterator();
+
+        $iterator->uasort(
+            function ($a, $b) {
+                return ($a->getOrder() < $b->getOrder()) ? -1 : 1;
+            }
+        );
+
+        return new ArrayCollection(array_values(iterator_to_array($iterator)));
     }
 
     /**

@@ -12,7 +12,7 @@ class MethodArgument extends BaseDocument
      * @PHPCR\Integer
      * @var integer
      **/
-	private $argumentOrder;
+	private $order;
 
     /**
      * @PHPCR\String
@@ -36,18 +36,18 @@ class MethodArgument extends BaseDocument
     /**
      * @return int
      */
-    public function getArgumentOrder()
+    public function getOrder()
     {
-        return $this->argumentOrder;
+        return $this->order;
     }
 
     /**
-     * @param int $argumentOrder
+     * @param int $order
      * @return $this
      */
-    public function setArgumentOrder($argumentOrder)
+    public function setOrder($order)
     {
-        $this->argumentOrder = $argumentOrder;
+        $this->order = $order;
 
         return $this;
     }
