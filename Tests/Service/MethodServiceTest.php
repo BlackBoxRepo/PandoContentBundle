@@ -11,9 +11,16 @@ class TestService
 {
     public function foo() {}
 
-    public function bar($a, $b, $c = 10) {}
+    public function bar($a, $b, $c = 10) {
+        return $a + $b + $c;
+    }
 
-    public function fooBar(array $arr) {}
+    public function fooBar(Method $method) {}
+
+    public function barFoo()
+    {
+        return 100;
+    }
 }
 
 class MethodServiceTest extends \PHPUnit_Framework_TestCase
@@ -43,7 +50,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
             ->setClassName('BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service\TestService')
         ;
 
-        $this->mTestService = $this->getMock('TestService');
+        $this->mTestService = $this->getMock('TestService', ['foo', 'bar', 'fooBar']);
     }
 
     /**
@@ -52,13 +59,26 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function call_noCallbackOrValue()
     {
+        $argument = new MethodArgument();
+        $argument
+            ->setOrder(0)
+        ;
+
         $method = new Method();
         $method
             ->setService($this->service)
-            ->addArgument(new MethodArgument())
+            ->setName('fooBar')
+            ->addArgument($argument)
         ;
 
         $this->service->addMethod($method);
+
+        $this->mContainer
+            ->expects($this->once())
+            ->method('get')
+            ->with($this->service->getServiceName())
+            ->willReturn(new TestService())
+        ;
 
         $this->methodService->call($method);
     }
@@ -142,13 +162,13 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\WrongNumberOfArguments
+     * @expectedException BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\WrongNumberOfArgumentsException
      */
     public function call_methodHasTooFewArguments()
     {
         $argument = new MethodArgument();
         $argument
-            ->setOrder(1)
+            ->setOrder(0)
             ->setValue(2)
         ;
 
@@ -173,31 +193,31 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\WrongNumberOfArguments
+     * @expectedException BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\WrongNumberOfArgumentsException
      */
     public function call_methodHasTooManyArguments()
     {
         $argument1 = new MethodArgument();
         $argument1
-            ->setOrder(1)
+            ->setOrder(0)
             ->setValue(2)
         ;
 
         $argument2 = new MethodArgument();
         $argument2
-            ->setOrder(2)
+            ->setOrder(1)
             ->setValue(2)
         ;
 
         $argument3 = new MethodArgument();
         $argument3
-            ->setOrder(3)
+            ->setOrder(2)
             ->setValue(2)
         ;
 
         $argument4 = new MethodArgument();
         $argument4
-            ->setOrder(4)
+            ->setOrder(3)
             ->setValue(2)
         ;
 
@@ -231,14 +251,14 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
         $argument1Value = 2;
         $argument1 = new MethodArgument();
         $argument1
-            ->setOrder(1)
+            ->setOrder(0)
             ->setValue($argument1Value)
         ;
 
         $argument2Value = 15;
         $argument2 = new MethodArgument();
         $argument2
-            ->setOrder(2)
+            ->setOrder(1)
             ->setValue($argument2Value);
 
         $method = new Method();
@@ -255,14 +275,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('get')
             ->with($this->service->getServiceName())
-            ->willReturn($this->mTestService)
-        ;
-
-        $this->mTestService
-            ->expects($this->once())
-            ->method('bar')
-            ->with($argument1Value, $argument2Value)
-            ->willReturn($argument1Value + $argument2Value + 10)
+            ->willReturn(new TestService())
         ;
 
         $return = $this->methodService->call($method);
@@ -277,7 +290,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
     {
         $argument = new MethodArgument();
         $argument
-            ->setOrder(1)
+            ->setOrder(0)
             ->setValue(2)
         ;
 
@@ -294,7 +307,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('get')
             ->with($this->service->getServiceName())
-            ->willReturn($this->mTestService)
+            ->willReturn(new TestService())
         ;
 
         $this->methodService->call($method);
@@ -305,33 +318,29 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function call_recursive()
     {
-        /** @var \PHPUnit_Framework_MockObject_MockObject|MethodService */
-        $mMethodService = $this->getMock(get_class($this->methodService));
-        $mMethodService->setContainer($this->mContainer);
-
-        $argument1 = new MethodArgument();
-        $argument1
-            ->setOrder(1)
-            ->setValue(['a', 'b', 'c'])
-        ;
-
         $callback = new Method();
         $callback
             ->setService($this->service)
-            ->setName('fooBar')
-            ->addArgument($argument1)
+            ->setName('barFoo')
+        ;
+
+        $argument1 = new MethodArgument();
+        $argument1
+            ->setOrder(0)
+            ->setCallback($callback)
         ;
 
         $argument2 = new MethodArgument();
         $argument2
             ->setOrder(1)
-            ->setCallback($callback)
+            ->setValue(20)
         ;
 
         $method = new Method();
         $method
             ->setService($this->service)
-            ->setName('foo')
+            ->setName('bar')
+            ->addArgument($argument1)
             ->addArgument($argument2)
         ;
 
@@ -341,26 +350,13 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
         ;
 
         $this->mContainer
-            ->expects($this->once())
+            ->expects($this->exactly(2))
             ->method('get')
             ->with($this->service->getServiceName())
-            ->willReturn($this->mTestService)
+            ->willReturn(new TestService())
         ;
 
-        $this->mTestService
-            ->expects($this->once())
-            ->method('foo')
-            ->willReturn('abc')
-        ;
-
-        $mMethodService
-            ->expects($this->once())
-            ->method('call')
-            ->with($callback)
-            ->willReturn(true)
-        ;
-
-        $return = $mMethodService->call($method);
-        $this->assertTrue($return);
+        $return = $this->methodService->call($method);
+        $this->assertEquals(130, $return);
     }
 }
