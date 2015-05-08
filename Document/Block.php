@@ -14,13 +14,13 @@ class Block extends AbstractBlock
      * @PHPCR\Id
      * @var string
      **/
-	private $id;
+	protected $id;
 
 	/**
      * @PHPCR\String
      * @var string
      **/
-	private $name;
+    protected $name;
 
 	/**
      * @PHPCR\Referrers(referringDocument="BlockVariable", referencedBy="block")

@@ -2,14 +2,11 @@
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Service;
 
 use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Block;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockVariable;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class BlockVariableService
 {
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
-
     /** @var MethodService */
     private $methodService;
 
@@ -18,22 +15,13 @@ class BlockVariableService
 
 
     /**
-     * @param EventDispatcherInterface $eventDispatcher
-     * @return $this
-     */
-    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher)
-    {
-        $this->eventDispatcher = $eventDispatcher;
-        return $this;
-    }
-
-    /**
      * @param MethodService $methodService
      * @return $this
      */
     public function setMethodService(MethodService $methodService)
     {
         $this->methodService = $methodService;
+
         return $this;
     }
 
@@ -44,6 +32,7 @@ class BlockVariableService
     public function setFormBlockContainerService(FormBlockContainerService $formBlockContainerService)
     {
         $this->formBlockContainerService = $formBlockContainerService;
+
         return $this;
     }
 
@@ -56,6 +45,13 @@ class BlockVariableService
      */
     public function populateBlockVariables(Block $block)
     {
+        $results = new ArrayCollection();
 
+        /** @var BlockVariable $variable */
+        foreach ($block->getVariables() as $variable) {
+            $results->set($variable->getName(), $this->methodService->call($variable->getMethod()));
+        }
+
+        return $results;
     }
 }
