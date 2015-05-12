@@ -9,7 +9,7 @@ use BlackBoxCode\Pando\Bundle\ContentBundle\Factory\AssetFactory;
 
 class AssetFactoryTest extends \PHPUnit_Framework_TestCase
 {
-    /** \PHPUnit_Framework_MockObject_MockObject|\AssetFactory */
+    /** \PHPUnit_Framework_MockObject_MockObject|AssetFactory */
     private $mAssetFactory;
 
     /** @var \PHPUnit_Framework_MockObject_MockObject|\SplFileInfo */
@@ -86,6 +86,12 @@ class AssetFactoryTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('getExtension')
             ->willReturn('somethingelse')
+        ;
+
+        $this->mAssetFactory
+            ->expects($this->once())
+            ->method('getMimeType')
+            ->willReturn('something/else')
         ;
 
         $return = $this->mAssetFactory->create($this->mSplFileInfo);
