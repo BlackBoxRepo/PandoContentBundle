@@ -32,6 +32,12 @@ class AssetFactory
         }
     }
 
+    /**
+     * Returns the mime-type of the given file
+     *
+     * @param \SplFileInfo $file
+     * @return string
+     */
     public function getMimeType(\SplFileInfo $file)
     {
         $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
