@@ -3,7 +3,6 @@ namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
 
 use BlackBoxCode\Pando\Bundle\ContentBundle\Command\MoveAssetsCommand;
 use BlackBoxCode\Pando\Bundle\ContentBundle\Document\File;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Image;
 use BlackBoxCode\Pando\Bundle\ContentBundle\Factory\AssetFactory;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
