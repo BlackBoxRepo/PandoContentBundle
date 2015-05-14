@@ -153,7 +153,7 @@ class MoveAssetsCommand extends ContainerAwareCommand
 
     /**
      * Returns an array of SplFileInfo objects and their
-     * linked location (if applicable) found in the given path
+     * linked location (if applicable) found recursively in the given path
      *
      * @param string $path
      * @param string|null $linkedLocation
