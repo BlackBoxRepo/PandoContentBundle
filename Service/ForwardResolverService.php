@@ -27,6 +27,6 @@ class ForwardResolverService
             return $isValid ? $formPage->getSuccessPage() : $formPage->getFailurePage();
         }
 
-        throw new NoFormPageException('');
+        throw new NoFormPageException(sprintf('The page "%s" does not have any FormPageDocuments that contain the "%s" form', $page->getName(), $form->getName()));
     }
 }
