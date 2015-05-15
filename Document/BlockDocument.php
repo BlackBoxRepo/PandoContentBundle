@@ -115,11 +115,11 @@ class BlockDocument extends AbstractBlock
 	}
 
 	/**
-	 * @param FormBlockMethod $formBlockMethod
+	 * @param FormBlockMethodDocument $formBlockMethod
      *
 	 * @return $this
 	 */
-	public function addFormBlockMethod(FormBlockMethod $formBlockMethod)
+	public function addFormBlockMethod(FormBlockMethodDocument $formBlockMethod)
 	{
 		$this->formBlockMethods->add($formBlockMethod);
 
@@ -127,11 +127,11 @@ class BlockDocument extends AbstractBlock
 	}
 
 	/**
-	 * @param FormBlockMethod $formBlockMethod
+	 * @param FormBlockMethodDocument $formBlockMethod
      *
 	 * @return $this
 	 */
-	public function removeFormBlockMethod(FormBlockMethod $formBlockMethod)
+	public function removeFormBlockMethod(FormBlockMethodDocument $formBlockMethod)
 	{
 		$this->formBlockMethods->removeElement($formBlockMethod);
 

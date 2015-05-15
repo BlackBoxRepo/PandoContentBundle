@@ -107,10 +107,11 @@ class FormDocument extends AbstractPhpcrDocument
     }
 
     /**
-     * @param FormBlockMethod $formBlockMethod
-     * @return $this
+     * @param FormBlockMethodDocument $formBlockMethod
+     *
+*@return $this
      */
-    public function addFormBlockMethod(FormBlockMethod $formBlockMethod)
+    public function addFormBlockMethod(FormBlockMethodDocument $formBlockMethod)
     {
         $this->formBlockMethods->add($formBlockMethod);
 
@@ -118,10 +119,11 @@ class FormDocument extends AbstractPhpcrDocument
     }
 
     /**
-     * @param FormBlockMethod $formBlockMethod
-     * @return $this
+     * @param FormBlockMethodDocument $formBlockMethod
+     *
+*@return $this
      */
-    public function removeFormBlockMethod(FormBlockMethod $formBlockMethod)
+    public function removeFormBlockMethod(FormBlockMethodDocument $formBlockMethod)
     {
         $this->formBlockMethods->removeElement($formBlockMethod);
 

@@ -6,7 +6,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class FormBlockMethod extends AbstractPhpcrDocument
+class FormBlockMethodDocument extends AbstractPhpcrDocument
 {
     /**
      * @PHPCR\ReferenceOne(targetDocument="Form", strategy="hard")
