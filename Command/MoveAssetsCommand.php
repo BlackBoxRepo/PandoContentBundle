@@ -138,7 +138,7 @@ class MoveAssetsCommand extends ContainerAwareCommand
      * Finds or creates a node
      *
      * @param string $path
-     * @return PHPCR\NodeInterface
+     * @return NodeInterface
      */
     public function findOrCreateNode($path)
     {
