@@ -1,10 +1,10 @@
 <?php
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Factory;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\File;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Image;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Javascript;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Stylesheet;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\FileDocument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\ImageDocument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\JavascriptDocument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\StylesheetDocument;
 use Symfony\Cmf\Bundle\MediaBundle\FileInterface;
 
 class AssetFactory
@@ -20,15 +20,15 @@ class AssetFactory
         $extension = $file->getExtension();
         switch ($extension) {
             case 'css':
-                return new Stylesheet();
+                return new StylesheetDocument();
             case 'js':
-                return new Javascript();
+                return new JavascriptDocument();
             default:
                 if (strstr($this->getMimeType($file), 'image')) {
-                    return new Image();
+                    return new ImageDocument();
                 }
 
-                return new File();
+                return new FileDocument();
         }
     }
 

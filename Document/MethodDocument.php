@@ -7,7 +7,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class Method extends BaseDocument
+class MethodDocument extends AbstractPhpcrDocument
 {
 	/**
      * @PHPCR\String
@@ -17,7 +17,7 @@ class Method extends BaseDocument
 
     /**
      * @PHPCR\ReferenceOne(targetDocument="Service", strategy="hard")
-     * @var Service
+     * @var ServiceDocument
      **/
 	private $service;
 
@@ -43,6 +43,7 @@ class Method extends BaseDocument
 
 	/**
 	 * @param string $name
+     *
 	 * @return $this
 	 */
 	public function setName($name)
@@ -53,7 +54,7 @@ class Method extends BaseDocument
 	}
 
     /**
-     * @return Service
+     * @return ServiceDocument
      */
     public function getService()
     {
@@ -61,10 +62,11 @@ class Method extends BaseDocument
     }
 
     /**
-     * @param Service $service
+     * @param ServiceDocument $service
+     *
      * @return $this
      */
-    public function setService(Service $service)
+    public function setService(ServiceDocument $service)
     {
         $this->service = $service;
 
@@ -88,10 +90,11 @@ class Method extends BaseDocument
     }
 
     /**
-     * @param MethodArgument $argument
+     * @param MethodArgumentDocument $argument
+     *
      * @return $this
      */
-    public function addArgument(MethodArgument $argument)
+    public function addArgument(MethodArgumentDocument $argument)
     {
         $this->arguments->add($argument);
 
@@ -99,10 +102,11 @@ class Method extends BaseDocument
     }
 
     /**
-     * @param MethodArgument $argument
+     * @param MethodArgumentDocument $argument
+     *
      * @return $this
      */
-    public function removeArgument(MethodArgument $argument)
+    public function removeArgument(MethodArgumentDocument $argument)
     {
         $this->arguments->removeElement($argument);
 

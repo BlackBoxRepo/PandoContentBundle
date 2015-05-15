@@ -7,7 +7,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class Form extends BaseDocument
+class FormDocument extends AbstractPhpcrDocument
 {
     /**
      * @PHPCR\String
@@ -17,13 +17,13 @@ class Form extends BaseDocument
 
     /**
      * @PHPCR\ReferenceOne(targetDocument="Page", strategy="hard")
-     * @var Page
+     * @var PageDocument
      **/
 	private $successPage;
 
     /**
      * @PHPCR\ReferenceOne(targetDocument="Page", strategy="hard")
-     * @var Page
+     * @var PageDocument
      **/
 	private $failurePage;
 
@@ -59,7 +59,7 @@ class Form extends BaseDocument
 	}
 
     /**
-     * @return Page
+     * @return PageDocument
      */
     public function getSuccessPage()
     {
@@ -67,10 +67,11 @@ class Form extends BaseDocument
     }
 
     /**
-     * @param Page $successPage
-     * @return $this
+     * @param PageDocument $successPage
+     *
+*@return $this
      */
-    public function setSuccessPage(Page $successPage)
+    public function setSuccessPage(PageDocument $successPage)
     {
         $this->successPage = $successPage;
 
@@ -78,7 +79,7 @@ class Form extends BaseDocument
     }
 
     /**
-     * @return Page
+     * @return PageDocument
      */
     public function getFailurePage()
     {
@@ -86,10 +87,11 @@ class Form extends BaseDocument
     }
 
     /**
-     * @param Page $failurePage
-     * @return $this
+     * @param PageDocument $failurePage
+     *
+*@return $this
      */
-    public function setFailurePage(Page $failurePage)
+    public function setFailurePage(PageDocument $failurePage)
     {
         $this->failurePage = $failurePage;
 

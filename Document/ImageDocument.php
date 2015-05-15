@@ -7,7 +7,7 @@ use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image as BaseImage;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class Image extends BaseImage
+class ImageDocument extends BaseImage
 {
 
 }

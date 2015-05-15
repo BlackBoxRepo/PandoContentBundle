@@ -1,7 +1,7 @@
 <?php
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodArgument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodArgumentDocument;
 use BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\BadArgumentTypeException;
 use BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\BadMethodCallException;
 use BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\MissingMethodArgumentException;
@@ -9,12 +9,13 @@ use BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\UndefinedServiceEx
 use BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\WrongNumberOfArgumentsException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\DependencyInjection\Container;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Method;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodDocument;
 
 class MethodService
 {
     /** @var Container */
     private $container;
+
 
     /**
      * @param Container $container
@@ -28,7 +29,7 @@ class MethodService
      * Executes the passed in method via the associated service that's retrieved from the container.
      * This gets called recursively to supply all the arguments for each given method.
      *
-     * @param Method $method
+     * @param MethodDocument $method
      *
      * @throws WrongNumberOfArgumentsException if we have more or less arguments than the method requires
      * @throws BadArgumentTypeException if the type of a given argument does not match the method arguments expected type
@@ -38,7 +39,7 @@ class MethodService
      *
      * @return mixed
      */
-    public function call(Method $method)
+    public function call(MethodDocument $method)
     {
         $serviceName = $method->getService()->getServiceName();
         $service = $this->container->get($serviceName);
@@ -71,6 +72,7 @@ class MethodService
     /**
      * @param array $params
      * @param ArrayCollection $methodArguments
+     *
      * @return array
      */
     private function buildArgumentArray(array $params, ArrayCollection $methodArguments)
@@ -85,7 +87,7 @@ class MethodService
             /** @var /ReflectionParameter $parameter */
             $param = $params[$i];
 
-            /** @var MethodArgument $argument */
+            /** @var MethodArgumentDocument $argument */
             $methodArgument = $methodArguments[$i];
 
             $callback = $methodArgument->getCallback();

@@ -6,29 +6,29 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class FormBlockMethod extends BaseDocument
+class FormBlockMethod extends AbstractPhpcrDocument
 {
     /**
      * @PHPCR\ReferenceOne(targetDocument="Form", strategy="hard")
-     * @var Form
+     * @var FormDocument
      **/
 	private $form;
 
     /**
      * @PHPCR\ReferenceOne(targetDocument="Block", strategy="hard")
-     * @var Block
+     * @var BlockDocument
      **/
 	private $block;
 
     /**
      * @PHPCR\ReferenceOne(targetDocument="Method", strategy="hard")
-     * @var Method
+     * @var MethodDocument
      **/
 	private $method;
 
 
 	/**
-	 * @return Form
+	 * @return FormDocument
 	 */
 	public function getForm()
 	{
@@ -36,8 +36,9 @@ class FormBlockMethod extends BaseDocument
 	}
 
 	/**
-	 * @param Form $form
-	 * @return $this
+	 * @param FormDocument $form
+	 *
+     * @return $this
 	 */
 	public function setForm($form)
 	{
@@ -47,7 +48,7 @@ class FormBlockMethod extends BaseDocument
 	}
 
     /**
-     * @return Block
+     * @return BlockDocument
      */
     public function getBlock()
     {
@@ -55,10 +56,11 @@ class FormBlockMethod extends BaseDocument
     }
 
     /**
-     * @param Block $block
+     * @param BlockDocument $block
+     *
      * @return $this
      */
-    public function setBlock(Block $block)
+    public function setBlock(BlockDocument $block)
     {
         $this->block = $block;
 
@@ -66,7 +68,7 @@ class FormBlockMethod extends BaseDocument
     }
 
     /**
-     * @return Method
+     * @return MethodDocument
      */
     public function getMethod()
     {
@@ -74,10 +76,11 @@ class FormBlockMethod extends BaseDocument
     }
 
     /**
-     * @param Method $method
+     * @param MethodDocument $method
+     *
      * @return $this
      */
-    public function setMethod(Method $method)
+    public function setMethod(MethodDocument $method)
     {
         $this->method = $method;
 

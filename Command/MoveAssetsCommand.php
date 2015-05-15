@@ -2,8 +2,8 @@
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Command;
 
 use BlackBoxCode\Pando\Bundle\ContentBundle\Factory\AssetFactory;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\File;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Image;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\FileDocument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\ImageDocument;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use PHPCR\Util\NodeHelper;
 use PHPCR\NodeInterface;
@@ -111,7 +111,7 @@ class MoveAssetsCommand extends ContainerAwareCommand
                 $parentPath = str_replace('\\', '/', $parentPath);
                 $parentNode = $this->findOrCreateNode('asset/' . $parentPath);
 
-                /** @var File|Image $asset */
+                /** @var FileDocument|ImageDocument $asset */
                 $asset = $assetFactory->create($file);
                 $asset
                     ->copyContentFromFile($file)

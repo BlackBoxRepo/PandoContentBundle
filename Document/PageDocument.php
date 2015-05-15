@@ -3,12 +3,12 @@ namespace BlackBoxCode\Pando\Bundle\ContentBundle\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
-use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page as BasePage;
+use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
 
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class Page extends BasePage
+class PageDocument extends Page
 {
     /**
      * @PHPCR\Id
@@ -52,6 +52,7 @@ class Page extends BasePage
 
 	/**
 	 * @param string $name
+     *
 	 * @return $this
 	 */
 	public function setName($name)
@@ -70,10 +71,11 @@ class Page extends BasePage
 	}
 
 	/**
-	 * @param Block $block
-	 * @return $this
+	 * @param BlockDocument $block
+	 *
+     * @return $this
 	 */
-	public function addBlock(Block $block)
+	public function addBlock(BlockDocument $block)
 	{
 		$this->blocks->add($block);
 
@@ -81,10 +83,11 @@ class Page extends BasePage
 	}
 
 	/**
-	 * @param Block $block
-	 * @return $this
+	 * @param BlockDocument $block
+	 *
+     * @return $this
 	 */
-	public function removeBlock(Block $block)
+	public function removeBlock(BlockDocument $block)
 	{
 		$this->blocks->removeElement($block);
 

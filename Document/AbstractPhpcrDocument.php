@@ -5,8 +5,12 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Doctrine\ODM\PHPCR\HierarchyInterface;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\PrefixInterface;
 
-class BaseDocument implements PrefixInterface, HierarchyInterface
+abstract class AbstractPhpcrDocument implements PrefixInterface, HierarchyInterface
 {
+    const DEFAULT_TEMPLATE_KEY = '_template';
+    const DEFAULT_CONTROLLER_KEY = '_controller';
+
+
     /**
      * @PHPCR\Id
      * @var string

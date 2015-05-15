@@ -23,6 +23,7 @@ class FormBlockContainerService
 
     /**
      * @param FormInterface $form
+     *
      * @return $this
      */
     public function setForm(FormInterface $form)
@@ -42,6 +43,7 @@ class FormBlockContainerService
 
     /**
      * @param BlockInterface $blockInterface
+     *
      * @return $this
      */
     public function setBlockInterface(BlockInterface $blockInterface)

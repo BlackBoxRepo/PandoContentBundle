@@ -6,7 +6,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class MethodArgument extends BaseDocument
+class MethodArgumentDocument extends AbstractPhpcrDocument
 {
     /**
      * @PHPCR\Integer
@@ -22,13 +22,13 @@ class MethodArgument extends BaseDocument
 
     /**
      * @PHPCR\ReferenceOne(targetDocument="Method", strategy="hard")
-     * @var Method
+     * @var MethodDocument
      **/
 	private $method;
 
     /**
      * @PHPCR\ReferenceOne(targetDocument="Method", strategy="hard")
-     * @var Method
+     * @var MethodDocument
      **/
 	private $callback;
 
@@ -43,6 +43,7 @@ class MethodArgument extends BaseDocument
 
     /**
      * @param int $order
+     *
      * @return $this
      */
     public function setOrder($order)
@@ -62,6 +63,7 @@ class MethodArgument extends BaseDocument
 
     /**
      * @param string $value
+     *
      * @return $this
      */
     public function setValue($value)
@@ -72,7 +74,7 @@ class MethodArgument extends BaseDocument
     }
 
     /**
-     * @return Method
+     * @return MethodDocument
      */
     public function getMethod()
     {
@@ -80,10 +82,11 @@ class MethodArgument extends BaseDocument
     }
 
     /**
-     * @param Method $method
+     * @param MethodDocument $method
+     *
      * @return $this
      */
-    public function setMethod(Method $method)
+    public function setMethod(MethodDocument $method)
     {
         $this->method = $method;
 
@@ -91,7 +94,7 @@ class MethodArgument extends BaseDocument
     }
 
     /**
-     * @return Method
+     * @return MethodDocument
      */
     public function getCallback()
     {
@@ -99,10 +102,11 @@ class MethodArgument extends BaseDocument
     }
 
     /**
-     * @param Method $callback
+     * @param MethodDocument $callback
+     *
      * @return $this
      */
-    public function setCallback(Method $callback)
+    public function setCallback(MethodDocument $callback)
     {
         $this->callback = $callback;
 

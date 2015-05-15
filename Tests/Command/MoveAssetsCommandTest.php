@@ -2,7 +2,7 @@
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
 
 use BlackBoxCode\Pando\Bundle\ContentBundle\Command\MoveAssetsCommand;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\File;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\FileDocument;
 use BlackBoxCode\Pando\Bundle\ContentBundle\Factory\AssetFactory;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
@@ -80,8 +80,8 @@ class MoveAssetsCommandTest extends \PHPUnit_Framework_TestCase
         $mSplFileInfo2 = clone $this->mSplFileInfo;
         $mSplFileInfo3 = clone $this->mSplFileInfo;
 
-        /** @var \PHPUnit_Framework_MockObject_MockObject|File $mAsset */
-        $mAsset = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Document\File');
+        /** @var \PHPUnit_Framework_MockObject_MockObject|FileDocument $mAsset */
+        $mAsset = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Document\FileDocument');
 
         $this->mMoveAssetsCommand
             ->expects($this->once())

@@ -1,17 +1,17 @@
 <?php
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Method;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodArgument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodDocument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodArgumentDocument;
 
 class MethodTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var Method */
+    /** @var MethodDocument */
     private $method;
 
     public function setUp()
     {
-        $this->method = new Method();
+        $this->method = new MethodDocument();
     }
 
     /**
@@ -19,19 +19,19 @@ class MethodTest extends \PHPUnit_Framework_TestCase
      */
     public function getArguments_isSorted()
     {
-        $arg1 = new MethodArgument();
+        $arg1 = new MethodArgumentDocument();
         $arg1
             ->setValue('c')
             ->setOrder(3)
         ;
 
-        $arg2 = new MethodArgument();
+        $arg2 = new MethodArgumentDocument();
         $arg2
             ->setValue('a')
             ->setOrder(1)
         ;
 
-        $arg3 = new MethodArgument();
+        $arg3 = new MethodArgumentDocument();
         $arg3
             ->setValue('b')
             ->setOrder(2)

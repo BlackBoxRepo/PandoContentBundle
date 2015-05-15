@@ -1,9 +1,9 @@
 <?php
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Block;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockVariable;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Method;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockDocument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockVariableDocument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodDocument;
 use BlackBoxCode\Pando\Bundle\ContentBundle\Service\BlockVariableService;
 use BlackBoxCode\Pando\Bundle\ContentBundle\Service\FormBlockContainerService;
 use BlackBoxCode\Pando\Bundle\ContentBundle\Service\MethodService;
@@ -38,19 +38,19 @@ class BlockVariableServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function populateBlockVariables()
     {
-        $variable1 = new BlockVariable();
+        $variable1 = new BlockVariableDocument();
         $variable1
             ->setName('variable 1')
-            ->setMethod(new Method())
+            ->setMethod(new MethodDocument())
         ;
 
-        $variable2 = new BlockVariable();
+        $variable2 = new BlockVariableDocument();
         $variable2
             ->setName('variable 2')
-            ->setMethod(new Method())
+            ->setMethod(new MethodDocument())
         ;
 
-        $block = new Block();
+        $block = new BlockDocument();
         $block
             ->addVariable($variable1)
             ->addVariable($variable2)
@@ -59,7 +59,7 @@ class BlockVariableServiceTest extends \PHPUnit_Framework_TestCase
         $this->mMethodService
             ->expects($this->exactly(2))
             ->method('call')
-            ->with($this->isInstanceOf(get_class(new Method())))
+            ->with($this->isInstanceOf(get_class(new MethodDocument())))
             ->willReturnOnConsecutiveCalls(
                 'abc',
                 ['a', 'b', 'c']

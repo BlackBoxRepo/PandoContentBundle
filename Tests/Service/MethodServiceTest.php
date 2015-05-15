@@ -1,9 +1,9 @@
 <?php
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Method;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodArgument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Service;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodDocument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodArgumentDocument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\ServiceDocument;
 use BlackBoxCode\Pando\Bundle\ContentBundle\Service\MethodService;
 use Symfony\Component\DependencyInjection\Container;
 
@@ -15,7 +15,7 @@ class TestService
         return $a + $b + $c;
     }
 
-    public function fooBar(Method $method) {}
+    public function fooBar(MethodDocument $method) {}
 
     public function barFoo()
     {
@@ -31,7 +31,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
     /** @var \PHPUnit_Framework_MockObject_MockObject|Container */
     private $mContainer;
 
-    /** @var Service */
+    /** @var ServiceDocument */
     private $service;
 
     /** @var \PHPUnit_Framework_MockObject_MockObject|TestService */
@@ -44,7 +44,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
         $this->mContainer = $this->getMock('Symfony\Component\DependencyInjection\Container');
         $this->methodService->setContainer($this->mContainer);
 
-        $this->service = new Service();
+        $this->service = new ServiceDocument();
         $this->service
             ->setServiceName('test_service')
             ->setClassName('BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service\TestService')
@@ -59,12 +59,12 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function call_noCallbackOrValue()
     {
-        $argument = new MethodArgument();
+        $argument = new MethodArgumentDocument();
         $argument
             ->setOrder(0)
         ;
 
-        $method = new Method();
+        $method = new MethodDocument();
         $method
             ->setService($this->service)
             ->setName('fooBar')
@@ -89,7 +89,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function call_serviceDoesNotExist()
     {
-        $method = new Method();
+        $method = new MethodDocument();
         $method
             ->setService($this->service)
         ;
@@ -112,7 +112,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function call_methodDoesNotExist()
     {
-        $method = new Method();
+        $method = new MethodDocument();
         $method
             ->setService($this->service)
             ->setName('blah')
@@ -135,7 +135,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function call_methodIsCalledAndReturned()
     {
-        $method = new Method();
+        $method = new MethodDocument();
         $method
             ->setService($this->service)
             ->setName('foo')
@@ -166,13 +166,13 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function call_methodHasTooFewArguments()
     {
-        $argument = new MethodArgument();
+        $argument = new MethodArgumentDocument();
         $argument
             ->setOrder(0)
             ->setValue(2)
         ;
 
-        $method = new Method();
+        $method = new MethodDocument();
         $method
             ->setService($this->service)
             ->setName('bar')
@@ -197,31 +197,31 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function call_methodHasTooManyArguments()
     {
-        $argument1 = new MethodArgument();
+        $argument1 = new MethodArgumentDocument();
         $argument1
             ->setOrder(0)
             ->setValue(2)
         ;
 
-        $argument2 = new MethodArgument();
+        $argument2 = new MethodArgumentDocument();
         $argument2
             ->setOrder(1)
             ->setValue(2)
         ;
 
-        $argument3 = new MethodArgument();
+        $argument3 = new MethodArgumentDocument();
         $argument3
             ->setOrder(2)
             ->setValue(2)
         ;
 
-        $argument4 = new MethodArgument();
+        $argument4 = new MethodArgumentDocument();
         $argument4
             ->setOrder(3)
             ->setValue(2)
         ;
 
-        $method = new Method();
+        $method = new MethodDocument();
         $method
             ->setService($this->service)
             ->setName('bar')
@@ -249,19 +249,19 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
     public function call_methodHasCorrectNumberOfRequiredArguments()
     {
         $argument1Value = 2;
-        $argument1 = new MethodArgument();
+        $argument1 = new MethodArgumentDocument();
         $argument1
             ->setOrder(0)
             ->setValue($argument1Value)
         ;
 
         $argument2Value = 15;
-        $argument2 = new MethodArgument();
+        $argument2 = new MethodArgumentDocument();
         $argument2
             ->setOrder(1)
             ->setValue($argument2Value);
 
-        $method = new Method();
+        $method = new MethodDocument();
         $method
             ->setService($this->service)
             ->setName('bar')
@@ -288,13 +288,13 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function call_methodArgumentIsOfWrongType()
     {
-        $argument = new MethodArgument();
+        $argument = new MethodArgumentDocument();
         $argument
             ->setOrder(0)
             ->setValue(2)
         ;
 
-        $method = new Method();
+        $method = new MethodDocument();
         $method
             ->setService($this->service)
             ->setName('fooBar')
@@ -318,25 +318,25 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function call_recursive()
     {
-        $callback = new Method();
+        $callback = new MethodDocument();
         $callback
             ->setService($this->service)
             ->setName('barFoo')
         ;
 
-        $argument1 = new MethodArgument();
+        $argument1 = new MethodArgumentDocument();
         $argument1
             ->setOrder(0)
             ->setCallback($callback)
         ;
 
-        $argument2 = new MethodArgument();
+        $argument2 = new MethodArgumentDocument();
         $argument2
             ->setOrder(1)
             ->setValue(20)
         ;
 
-        $method = new Method();
+        $method = new MethodDocument();
         $method
             ->setService($this->service)
             ->setName('bar')

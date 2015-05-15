@@ -1,8 +1,8 @@
 <?php
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Block;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockVariable;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockDocument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockVariableDocument;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class BlockVariableService
@@ -16,6 +16,7 @@ class BlockVariableService
 
     /**
      * @param MethodService $methodService
+     *
      * @return $this
      */
     public function setMethodService(MethodService $methodService)
@@ -27,6 +28,7 @@ class BlockVariableService
 
     /**
      * @param FormBlockContainerService $formBlockContainerService
+     *
      * @return $this
      */
     public function setFormBlockContainerService(FormBlockContainerService $formBlockContainerService)
@@ -37,17 +39,18 @@ class BlockVariableService
     }
 
     /**
-     * Returns an ArrayCollection where the keys are the BlockVariable names
+     * Returns an ArrayCollection where the keys are the BlockVariableDocument names
      * and the values are the return of the associated method
      *
-     * @param Block $block
+     * @param BlockDocument $block
+     *
      * @return ArrayCollection
      */
-    public function populateBlockVariables(Block $block)
+    public function populateBlockVariables(BlockDocument $block)
     {
         $results = new ArrayCollection();
 
-        /** @var BlockVariable $variable */
+        /** @var BlockVariableDocument $variable */
         foreach ($block->getVariables() as $variable) {
             $results->set($variable->getName(), $this->methodService->call($variable->getMethod()));
         }

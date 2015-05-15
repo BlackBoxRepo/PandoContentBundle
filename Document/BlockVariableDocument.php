@@ -6,7 +6,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class BlockVariable extends BaseDocument
+class BlockVariableDocument extends AbstractPhpcrDocument
 {
     /**
      * @PHPCR\String
@@ -16,13 +16,13 @@ class BlockVariable extends BaseDocument
 
 	/**
      * @PHPCR\ReferenceOne(targetDocument="Block", strategy="hard")
-     * @var Block
+     * @var BlockDocument
      **/
 	private $block;
 
     /**
      * @PHPCR\ReferenceOne(targetDocument="Method", strategy="hard")
-     * @var Method
+     * @var MethodDocument
      **/
 	private $method;
 
@@ -37,6 +37,7 @@ class BlockVariable extends BaseDocument
 
 	/**
 	 * @param string $name
+     *
 	 * @return $this
 	 */
 	public function setName($name)
@@ -47,7 +48,7 @@ class BlockVariable extends BaseDocument
 	}
 
     /**
-     * @return Block
+     * @return BlockDocument
      */
     public function getBlock()
     {
@@ -55,10 +56,11 @@ class BlockVariable extends BaseDocument
     }
 
     /**
-     * @param Block $block
+     * @param BlockDocument $block
+     *
      * @return $this
      */
-    public function setBlock(Block $block)
+    public function setBlock(BlockDocument $block)
     {
         $this->block = $block;
 
@@ -66,7 +68,7 @@ class BlockVariable extends BaseDocument
     }
 
     /**
-     * @return Method
+     * @return MethodDocument
      */
     public function getMethod()
     {
@@ -74,10 +76,11 @@ class BlockVariable extends BaseDocument
     }
 
     /**
-     * @param Method $method
+     * @param MethodDocument $method
+     *
      * @return $this
      */
-    public function setMethod(Method $method)
+    public function setMethod(MethodDocument $method)
     {
         $this->method = $method;
 

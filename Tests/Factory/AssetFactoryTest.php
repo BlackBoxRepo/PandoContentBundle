@@ -1,15 +1,15 @@
 <?php
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\File;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Image;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Javascript;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\Stylesheet;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\FileDocument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\ImageDocument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\JavascriptDocument;
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\StylesheetDocument;
 use BlackBoxCode\Pando\Bundle\ContentBundle\Factory\AssetFactory;
 
 class AssetFactoryTest extends \PHPUnit_Framework_TestCase
 {
-    /** \PHPUnit_Framework_MockObject_MockObject|AssetFactory */
+    /** @var \PHPUnit_Framework_MockObject_MockObject|AssetFactory */
     private $mAssetFactory;
 
     /** @var \PHPUnit_Framework_MockObject_MockObject|\SplFileInfo */
@@ -44,7 +44,7 @@ class AssetFactoryTest extends \PHPUnit_Framework_TestCase
         ;
 
         $return = $this->mAssetFactory->create($this->mSplFileInfo);
-        $this->assertInstanceOf(get_class(new Image()), $return);
+        $this->assertInstanceOf(get_class(new ImageDocument()), $return);
     }
 
     /**
@@ -59,7 +59,7 @@ class AssetFactoryTest extends \PHPUnit_Framework_TestCase
         ;
 
         $return = $this->mAssetFactory->create($this->mSplFileInfo);
-        $this->assertInstanceOf(get_class(new Stylesheet()), $return);
+        $this->assertInstanceOf(get_class(new StylesheetDocument()), $return);
     }
 
     /**
@@ -74,7 +74,7 @@ class AssetFactoryTest extends \PHPUnit_Framework_TestCase
         ;
 
         $return = $this->mAssetFactory->create($this->mSplFileInfo);
-        $this->assertInstanceOf(get_class(new Javascript()), $return);
+        $this->assertInstanceOf(get_class(new JavascriptDocument()), $return);
     }
 
     /**
@@ -95,6 +95,6 @@ class AssetFactoryTest extends \PHPUnit_Framework_TestCase
         ;
 
         $return = $this->mAssetFactory->create($this->mSplFileInfo);
-        $this->assertInstanceOf(get_class(new File()), $return);
+        $this->assertInstanceOf(get_class(new FileDocument()), $return);
     }
 }

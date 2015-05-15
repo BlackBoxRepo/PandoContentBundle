@@ -8,7 +8,7 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\AbstractBlock;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class Block extends AbstractBlock
+class BlockDocument extends AbstractBlock
 {
 	/**
      * @PHPCR\Id
@@ -23,8 +23,8 @@ class Block extends AbstractBlock
     protected $name;
 
 	/**
-     * @PHPCR\Referrers(referringDocument="BlockVariable", referencedBy="block")
-     * @var ArrayCollection<BlockVariable>
+     * @PHPCR\Referrers(referringDocument="BlockVariableDocument", referencedBy="block")
+     * @var ArrayCollection<BlockVariableDocument>
      **/
 	private $variables;
 
@@ -64,6 +64,7 @@ class Block extends AbstractBlock
 
 	/**
 	 * @param string $name
+     *
 	 * @return $this
 	 */
 	public function setName($name)
@@ -74,7 +75,7 @@ class Block extends AbstractBlock
 	}
 
 	/**
-	 * @return ArrayCollection<BlockVariable>
+	 * @return ArrayCollection<BlockVariableDocument>
 	 */
 	public function getVariables()
 	{
@@ -82,10 +83,11 @@ class Block extends AbstractBlock
 	}
 
 	/**
-	 * @param BlockVariable $variable
-	 * @return $this
+	 * @param BlockVariableDocument $variable
+	 *
+     * @return $this
 	 */
-	public function addVariable(BlockVariable $variable)
+	public function addVariable(BlockVariableDocument $variable)
 	{
 		$this->variables->add($variable);
 
@@ -93,10 +95,11 @@ class Block extends AbstractBlock
 	}
 
 	/**
-	 * @param BlockVariable $variable
-	 * @return $this
+	 * @param BlockVariableDocument $variable
+	 *
+     * @return $this
 	 */
-	public function removeVariable(BlockVariable $variable)
+	public function removeVariable(BlockVariableDocument $variable)
 	{
 		$this->variables->removeElement($variable);
 
@@ -113,6 +116,7 @@ class Block extends AbstractBlock
 
 	/**
 	 * @param FormBlockMethod $formBlockMethod
+     *
 	 * @return $this
 	 */
 	public function addFormBlockMethod(FormBlockMethod $formBlockMethod)
@@ -124,6 +128,7 @@ class Block extends AbstractBlock
 
 	/**
 	 * @param FormBlockMethod $formBlockMethod
+     *
 	 * @return $this
 	 */
 	public function removeFormBlockMethod(FormBlockMethod $formBlockMethod)
