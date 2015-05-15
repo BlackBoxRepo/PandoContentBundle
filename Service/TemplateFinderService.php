@@ -1,6 +1,7 @@
 <?php
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Service;
 
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\AbstractPhpcrDocument;
 use BlackBoxCode\Pando\Bundle\ContentBundle\Document\PageDocument;
 use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 use Symfony\Cmf\Component\Routing\Enhancer\RouteEnhancerInterface;
@@ -51,7 +52,7 @@ class TemplateFinderService
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        $template = $page->getDefault('_template');
+        $template = $page->getDefault(AbstractPhpcrDocument::DEFAULT_TEMPLATE_KEY);
         if ($template === null) {
             $defaults = [];
 
@@ -60,8 +61,8 @@ class TemplateFinderService
                 $defaults = array_merge($defaults, $enhancer->enhance(['_content' => $page], $request));
             }
 
-            if (array_key_exists('_template', $defaults)) {
-                $template = $defaults['_template'];
+            if (array_key_exists(AbstractPhpcrDocument::DEFAULT_TEMPLATE_KEY, $defaults)) {
+                $template = $defaults[AbstractPhpcrDocument::DEFAULT_TEMPLATE_KEY];
             }
         }
 

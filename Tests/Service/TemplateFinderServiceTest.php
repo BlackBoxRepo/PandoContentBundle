@@ -1,6 +1,7 @@
 <?php
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
 
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\AbstractPhpcrDocument;
 use BlackBoxCode\Pando\Bundle\ContentBundle\Document\PageDocument;
 use BlackBoxCode\Pando\Bundle\ContentBundle\Service\TemplateFinderService;
 use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
@@ -57,6 +58,7 @@ class TemplateFinderServiceTest extends \PHPUnit_Framework_TestCase
         $this->mPage
             ->expects($this->once())
             ->method('getDefault')
+            ->with(AbstractPhpcrDocument::DEFAULT_TEMPLATE_KEY)
             ->willReturn($templateName)
         ;
 
@@ -102,7 +104,7 @@ class TemplateFinderServiceTest extends \PHPUnit_Framework_TestCase
             ->method('enhance')
             ->with(['_content' => $this->mPage])
             ->willReturn([
-                '_template' => 'def456'
+                AbstractPhpcrDocument::DEFAULT_TEMPLATE_KEY => 'def456'
             ])
         ;
 
