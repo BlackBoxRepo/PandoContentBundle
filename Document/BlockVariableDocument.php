@@ -15,13 +15,13 @@ class BlockVariableDocument extends AbstractPhpcrDocument
     private $name;
 
 	/**
-     * @PHPCR\ReferenceOne(targetDocument="Block", strategy="hard")
+     * @PHPCR\ReferenceOne(targetDocument="BlockDocument", strategy="hard")
      * @var BlockDocument
      **/
 	private $block;
 
     /**
-     * @PHPCR\ReferenceOne(targetDocument="Method", strategy="hard")
+     * @PHPCR\ReferenceOne(targetDocument="MethodDocument", strategy="hard")
      * @var MethodDocument
      **/
 	private $method;

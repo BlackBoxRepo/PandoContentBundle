@@ -16,20 +16,8 @@ class FormDocument extends AbstractPhpcrDocument
     private $name;
 
     /**
-     * @PHPCR\ReferenceOne(targetDocument="Page", strategy="hard")
-     * @var PageDocument
-     **/
-	private $successPage;
-
-    /**
-     * @PHPCR\ReferenceOne(targetDocument="Page", strategy="hard")
-     * @var PageDocument
-     **/
-	private $failurePage;
-
-    /**
-     * @PHPCR\Referrers(referringDocument="FormBlockMethod", referencedBy="form")
-     * @var ArrayCollection<FormBlockMethod>
+     * @PHPCR\Referrers(referringDocument="FormBlockMethodDocument", referencedBy="form")
+     * @var ArrayCollection<FormBlockMethodDocument>
      **/
     private $formBlockMethods;
 
@@ -59,47 +47,7 @@ class FormDocument extends AbstractPhpcrDocument
 	}
 
     /**
-     * @return PageDocument
-     */
-    public function getSuccessPage()
-    {
-        return $this->successPage;
-    }
-
-    /**
-     * @param PageDocument $successPage
-     *
-*@return $this
-     */
-    public function setSuccessPage(PageDocument $successPage)
-    {
-        $this->successPage = $successPage;
-
-        return $this;
-    }
-
-    /**
-     * @return PageDocument
-     */
-    public function getFailurePage()
-    {
-        return $this->failurePage;
-    }
-
-    /**
-     * @param PageDocument $failurePage
-     *
-*@return $this
-     */
-    public function setFailurePage(PageDocument $failurePage)
-    {
-        $this->failurePage = $failurePage;
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection<FormBlockMethod>
+     * @return ArrayCollection<FormBlockMethodDocument>
      */
     public function getFormBlockMethods()
     {
@@ -109,7 +57,7 @@ class FormDocument extends AbstractPhpcrDocument
     /**
      * @param FormBlockMethodDocument $formBlockMethod
      *
-*@return $this
+     * @return $this
      */
     public function addFormBlockMethod(FormBlockMethodDocument $formBlockMethod)
     {
@@ -121,7 +69,7 @@ class FormDocument extends AbstractPhpcrDocument
     /**
      * @param FormBlockMethodDocument $formBlockMethod
      *
-*@return $this
+     * @return $this
      */
     public function removeFormBlockMethod(FormBlockMethodDocument $formBlockMethod)
     {

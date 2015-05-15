@@ -29,10 +29,16 @@ class BlockDocument extends AbstractBlock
 	private $variables;
 
 	/**
-     * @PHPCR\Referrers(referringDocument="FormBlockMethod", referencedBy="block")
-     * @var ArrayCollection<FormBlockMethod>
+     * @PHPCR\Referrers(referringDocument="FormBlockMethodDocument", referencedBy="block")
+     * @var ArrayCollection<FormBlockMethodDocument>
      **/
 	private $formBlockMethods;
+
+    /**
+     * @PHPCR\ReferenceOne(targetDocument="TemplateDocument", strategy="hard")
+     * @var TemplateDocument
+     */
+    private $template;
 
 
 	public function __construct()
@@ -107,7 +113,7 @@ class BlockDocument extends AbstractBlock
 	}
 
 	/**
-	 * @return ArrayCollection<FormBlockMethod>
+	 * @return ArrayCollection<FormBlockMethodDocument>
 	 */
 	public function getFormBlockMethods()
 	{
@@ -137,4 +143,24 @@ class BlockDocument extends AbstractBlock
 
 		return $this;
 	}
+
+    /**
+     * @return TemplateDocument
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * @param TemplateDocument $template
+     *
+     * @return $this
+     */
+    public function setTemplate(TemplateDocument $template)
+    {
+        $this->template = $template;
+
+        return $this;
+    }
 }

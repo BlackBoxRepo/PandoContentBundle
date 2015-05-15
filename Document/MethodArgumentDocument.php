@@ -21,13 +21,13 @@ class MethodArgumentDocument extends AbstractPhpcrDocument
     private $value;
 
     /**
-     * @PHPCR\ReferenceOne(targetDocument="Method", strategy="hard")
+     * @PHPCR\ReferenceOne(targetDocument="MethodDocument", strategy="hard")
      * @var MethodDocument
      **/
 	private $method;
 
     /**
-     * @PHPCR\ReferenceOne(targetDocument="Method", strategy="hard")
+     * @PHPCR\ReferenceOne(targetDocument="MethodDocument", strategy="hard")
      * @var MethodDocument
      **/
 	private $callback;

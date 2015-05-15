@@ -23,15 +23,22 @@ class PageDocument extends Page
 	protected $name;
 
 	/**
-     * @PHPCR\ReferenceMany(targetDocument="Block", strategy="hard")
-     * @var ArrayCollection<Block>
+     * @PHPCR\ReferenceMany(targetDocument="BlockDocument", strategy="hard")
+     * @var ArrayCollection<BlockDocument>
      **/
 	private $blocks;
+
+    /**
+     * @PHPCR\ReferenceMany(targetDocument="FormPageDocument", strategy="hard")
+     * @var ArrayCollection<FormPageDocument>
+     **/
+    private $formPages;
 
 
 	public function __construct()
 	{
-		$this->blocks = new ArrayCollection();
+		$this->blocks    = new ArrayCollection();
+        $this->formPages = new ArrayCollection();
 	}
 
 	/**
@@ -63,7 +70,7 @@ class PageDocument extends Page
 	}
 
 	/**
-	 * @return ArrayCollection<Block>
+	 * @return ArrayCollection<BlockDocument>
 	 */
 	public function getBlocks()
 	{
@@ -93,4 +100,36 @@ class PageDocument extends Page
 
 		return $this;
 	}
+
+    /**
+     * @return ArrayCollection<FormPageDocument>
+     */
+    public function getFormPages()
+    {
+        return $this->formPages;
+    }
+
+    /**
+     * @param FormPageDocument $formPage
+     *
+     * @return $this
+     */
+    public function addFormPage(FormPageDocument $formPage)
+    {
+        $this->formPages->add($formPage);
+
+        return $this;
+    }
+
+    /**
+     * @param FormPageDocument $formPage
+     *
+     * @return $this
+     */
+    public function removeFormPage(FormPageDocument $formPage)
+    {
+        $this->blocks->removeElement($formPage);
+
+        return $this;
+    }
 }

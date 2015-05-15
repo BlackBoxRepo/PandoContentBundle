@@ -9,19 +9,19 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 class FormBlockMethodDocument extends AbstractPhpcrDocument
 {
     /**
-     * @PHPCR\ReferenceOne(targetDocument="Form", strategy="hard")
+     * @PHPCR\ReferenceOne(targetDocument="FormDocument", strategy="hard")
      * @var FormDocument
      **/
 	private $form;
 
     /**
-     * @PHPCR\ReferenceOne(targetDocument="Block", strategy="hard")
+     * @PHPCR\ReferenceOne(targetDocument="BlockDocument", strategy="hard")
      * @var BlockDocument
      **/
 	private $block;
 
     /**
-     * @PHPCR\ReferenceOne(targetDocument="Method", strategy="hard")
+     * @PHPCR\ReferenceOne(targetDocument="MethodDocument", strategy="hard")
      * @var MethodDocument
      **/
 	private $method;

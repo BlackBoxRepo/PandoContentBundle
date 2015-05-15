@@ -16,14 +16,14 @@ class MethodDocument extends AbstractPhpcrDocument
 	private $name;
 
     /**
-     * @PHPCR\ReferenceOne(targetDocument="Service", strategy="hard")
+     * @PHPCR\ReferenceOne(targetDocument="ServiceDocument", strategy="hard")
      * @var ServiceDocument
      **/
 	private $service;
 
     /**
-     * @PHPCR\Referrers(referringDocument="MethodArgument", referencedBy="method")
-     * @var ArrayCollection<MethodArgument>
+     * @PHPCR\Referrers(referringDocument="MethodArgumentDocument", referencedBy="method")
+     * @var ArrayCollection<MethodArgumentDocument>
      **/
 	private $arguments;
 
@@ -74,7 +74,7 @@ class MethodDocument extends AbstractPhpcrDocument
     }
 
     /**
-     * @return ArrayCollection<MethodArgument>
+     * @return ArrayCollection<MethodArgumentDocument>
      */
     public function getArguments()
     {

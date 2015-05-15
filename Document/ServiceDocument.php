@@ -22,8 +22,8 @@ class ServiceDocument extends AbstractPhpcrDocument
 	private $className;
 
     /**
-     * @PHPCR\Referrers(referringDocument="Method", referencedBy="service")
-     * @var ArrayCollection<Method>
+     * @PHPCR\Referrers(referringDocument="MethodDocument", referencedBy="service")
+     * @var ArrayCollection<MethodDocument>
      **/
 	private $methods;
 
@@ -74,7 +74,7 @@ class ServiceDocument extends AbstractPhpcrDocument
 	}
 
     /**
-     * @return ArrayCollection<Method>
+     * @return ArrayCollection<MethodDocument>
      */
     public function getMethods()
     {
