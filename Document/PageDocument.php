@@ -14,13 +14,13 @@ class PageDocument extends Page
      * @PHPCR\Id
      * @var string
      **/
-	private $id;
+	protected $id;
 
     /**
      * @PHPCR\String
      * @var string
      **/
-	private $name;
+	protected $name;
 
 	/**
      * @PHPCR\ReferenceMany(targetDocument="Block", strategy="hard")
