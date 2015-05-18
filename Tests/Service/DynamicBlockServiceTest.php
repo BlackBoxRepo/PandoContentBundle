@@ -94,7 +94,7 @@ class DynamicBlockServiceTest extends \PHPUnit_Framework_TestCase
 
         $mBlock
             ->expects($this->once())
-            ->method('getBlockVariables')
+            ->method('getVariables')
             ->willReturn($blockVariables)
         ;
 

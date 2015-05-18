@@ -10,7 +10,7 @@ class FormBlockContainerService
     private $form;
 
     /** @var BlockInterface */
-    private $blockInterface;
+    private $block;
 
 
     /**
@@ -34,21 +34,21 @@ class FormBlockContainerService
     }
 
     /**
-     * @return mixed
+     * @return BlockInterface
      */
-    public function getBlockInterface()
+    public function getBlock()
     {
-        return $this->blockInterface;
+        return $this->block;
     }
 
     /**
-     * @param BlockInterface $blockInterface
+     * @param BlockInterface $block
      *
      * @return $this
      */
-    public function setBlockInterface(BlockInterface $blockInterface)
+    public function setBlock(BlockInterface $block)
     {
-        $this->blockInterface = $blockInterface;
+        $this->block = $block;
 
         return $this;
     }

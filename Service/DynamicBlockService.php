@@ -1,6 +1,7 @@
 <?php
 namespace BlackBoxCode\Pando\Bundle\ContentBundle\Service;
 
+use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockDocument;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -96,13 +97,16 @@ class DynamicBlockService extends BaseBlockService
      * Process form methods for the form/block combo
      *
      * @param BlockContextInterface $blockContext
-     * @param Response              $response
+     * @param Response $response
      *
-     * @return ...
+     * @return Response
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-
+        /** @var BlockDocument $block */
+        $block = $blockContext->getBlock();
+        $this->formService->processBlock($block);
+        return $this->templating->renderResponse($block->getTemplate()->getName(), $block->getVariables()->toArray());
     }
 
     /**
@@ -112,6 +116,7 @@ class DynamicBlockService extends BaseBlockService
      */
     public function load(BlockInterface $block)
     {
-
+        $this->formBlockContainerService->setBlock($block);
+        $this->blockVariableService->populateBlockVariables($block);
     }
 }
