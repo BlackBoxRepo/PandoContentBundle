@@ -1,12 +1,12 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
+namespace BlackBoxCode\Pando\ContentBundle\Tests\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockVariableDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Service\BlockVariableService;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Service\FormBlockContainerService;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Service\MethodService;
+use BlackBoxCode\Pando\ContentBundle\Document\BlockDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\BlockVariableDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\MethodDocument;
+use BlackBoxCode\Pando\ContentBundle\Service\BlockVariableService;
+use BlackBoxCode\Pando\ContentBundle\Service\FormBlockContainerService;
+use BlackBoxCode\Pando\ContentBundle\Service\MethodService;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class BlockVariableServiceTest extends \PHPUnit_Framework_TestCase
@@ -23,8 +23,8 @@ class BlockVariableServiceTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->mMethodService = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Service\MethodService');
-        $this->mFormBlockContainerService = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Service\FormBlockContainerService');
+        $this->mMethodService = $this->getMock('BlackBoxCode\Pando\ContentBundle\Service\MethodService');
+        $this->mFormBlockContainerService = $this->getMock('BlackBoxCode\Pando\ContentBundle\Service\FormBlockContainerService');
 
         $this->blockVariableService = new BlockVariableService();
         $this->blockVariableService

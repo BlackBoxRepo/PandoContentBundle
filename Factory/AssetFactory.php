@@ -1,10 +1,10 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Factory;
+namespace BlackBoxCode\Pando\ContentBundle\Factory;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\FileDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\ImageDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\JavascriptDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\StylesheetDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\FileDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\ImageDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\JavascriptDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\StylesheetDocument;
 use Symfony\Cmf\Bundle\MediaBundle\FileInterface;
 
 class AssetFactory

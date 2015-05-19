@@ -1,9 +1,9 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
+namespace BlackBoxCode\Pando\ContentBundle\Tests\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Command\MoveAssetsCommand;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\FileDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Factory\AssetFactory;
+use BlackBoxCode\Pando\ContentBundle\Command\MoveAssetsCommand;
+use BlackBoxCode\Pando\ContentBundle\Document\FileDocument;
+use BlackBoxCode\Pando\ContentBundle\Factory\AssetFactory;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -29,7 +29,7 @@ class MoveAssetsCommandTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->mMoveAssetsCommand = $this
-            ->getMockBuilder('BlackBoxCode\Pando\Bundle\ContentBundle\Command\MoveAssetsCommand')
+            ->getMockBuilder('BlackBoxCode\Pando\ContentBundle\Command\MoveAssetsCommand')
             ->setMethods([
                 'getDocumentManager',
                 'getAssetFactory',
@@ -48,7 +48,7 @@ class MoveAssetsCommandTest extends \PHPUnit_Framework_TestCase
             ->getMock()
         ;
 
-        $this->mAssetFactory = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Factory\AssetFactory');
+        $this->mAssetFactory = $this->getMock('BlackBoxCode\Pando\ContentBundle\Factory\AssetFactory');
 
         $this->mSplFileInfo = $this
             ->getMockBuilder('\SplFileInfo')
@@ -81,7 +81,7 @@ class MoveAssetsCommandTest extends \PHPUnit_Framework_TestCase
         $mSplFileInfo3 = clone $this->mSplFileInfo;
 
         /** @var \PHPUnit_Framework_MockObject_MockObject|FileDocument $mAsset */
-        $mAsset = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Document\FileDocument');
+        $mAsset = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\FileDocument');
 
         $this->mMoveAssetsCommand
             ->expects($this->once())

@@ -1,8 +1,8 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
+namespace BlackBoxCode\Pando\ContentBundle\Tests\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodArgumentDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\MethodDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\MethodArgumentDocument;
 
 class MethodTest extends \PHPUnit_Framework_TestCase
 {

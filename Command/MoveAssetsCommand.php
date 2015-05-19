@@ -1,9 +1,9 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Command;
+namespace BlackBoxCode\Pando\ContentBundle\Command;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Factory\AssetFactory;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\FileDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\ImageDocument;
+use BlackBoxCode\Pando\ContentBundle\Factory\AssetFactory;
+use BlackBoxCode\Pando\ContentBundle\Document\FileDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\ImageDocument;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use PHPCR\Util\NodeHelper;
 use PHPCR\NodeInterface;

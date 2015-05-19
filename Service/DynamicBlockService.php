@@ -1,7 +1,7 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Service;
+namespace BlackBoxCode\Pando\ContentBundle\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\BlockDocument;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;

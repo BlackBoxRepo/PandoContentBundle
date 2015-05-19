@@ -1,5 +1,5 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Document;
+namespace BlackBoxCode\Pando\ContentBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Doctrine\ODM\PHPCR\HierarchyInterface;

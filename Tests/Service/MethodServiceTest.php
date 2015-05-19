@@ -1,10 +1,10 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
+namespace BlackBoxCode\Pando\ContentBundle\Tests\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodArgumentDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\ServiceDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Service\MethodService;
+use BlackBoxCode\Pando\ContentBundle\Document\MethodDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\MethodArgumentDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\ServiceDocument;
+use BlackBoxCode\Pando\ContentBundle\Service\MethodService;
 use Symfony\Component\DependencyInjection\Container;
 
 class TestService
@@ -47,7 +47,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
         $this->service = new ServiceDocument();
         $this->service
             ->setServiceName('test_service')
-            ->setClassName('BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service\TestService')
+            ->setClassName('BlackBoxCode\Pando\ContentBundle\Tests\Service\TestService')
         ;
 
         $this->mTestService = $this->getMock('TestService', ['foo', 'bar', 'fooBar']);
@@ -55,7 +55,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\MissingMethodArgumentException
+     * @expectedException BlackBoxCode\Pando\ContentBundle\Exception\Service\MissingMethodArgumentException
      */
     public function call_noCallbackOrValue()
     {
@@ -85,7 +85,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\UndefinedServiceException
+     * @expectedException BlackBoxCode\Pando\ContentBundle\Exception\Service\UndefinedServiceException
      */
     public function call_serviceDoesNotExist()
     {
@@ -108,7 +108,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\BadMethodCallException
+     * @expectedException BlackBoxCode\Pando\ContentBundle\Exception\Service\BadMethodCallException
      */
     public function call_methodDoesNotExist()
     {
@@ -162,7 +162,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\WrongNumberOfArgumentsException
+     * @expectedException BlackBoxCode\Pando\ContentBundle\Exception\Service\WrongNumberOfArgumentsException
      */
     public function call_methodHasTooFewArguments()
     {
@@ -193,7 +193,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\WrongNumberOfArgumentsException
+     * @expectedException BlackBoxCode\Pando\ContentBundle\Exception\Service\WrongNumberOfArgumentsException
      */
     public function call_methodHasTooManyArguments()
     {
@@ -284,7 +284,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\BadArgumentTypeException
+     * @expectedException BlackBoxCode\Pando\ContentBundle\Exception\Service\BadArgumentTypeException
      */
     public function call_methodArgumentIsOfWrongType()
     {

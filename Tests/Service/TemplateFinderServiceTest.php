@@ -1,9 +1,9 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
+namespace BlackBoxCode\Pando\ContentBundle\Tests\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\AbstractPhpcrDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\PageDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Service\TemplateFinderService;
+use BlackBoxCode\Pando\ContentBundle\Document\AbstractPhpcrDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\PageDocument;
+use BlackBoxCode\Pando\ContentBundle\Service\TemplateFinderService;
 use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -39,7 +39,7 @@ class TemplateFinderServiceTest extends \PHPUnit_Framework_TestCase
             ->setRequestStack($this->mRequestStack)
         ;
 
-        $this->mPage = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Document\PageDocument');
+        $this->mPage = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\PageDocument');
 
         $this->mRequestStack
             ->expects($this->once())

@@ -1,11 +1,11 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
+namespace BlackBoxCode\Pando\ContentBundle\Tests\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\FileDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\ImageDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\JavascriptDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\StylesheetDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Factory\AssetFactory;
+use BlackBoxCode\Pando\ContentBundle\Document\FileDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\ImageDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\JavascriptDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\StylesheetDocument;
+use BlackBoxCode\Pando\ContentBundle\Factory\AssetFactory;
 
 class AssetFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +18,7 @@ class AssetFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->mAssetFactory = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Factory\AssetFactory', ['getMimeType']);
+        $this->mAssetFactory = $this->getMock('BlackBoxCode\Pando\ContentBundle\Factory\AssetFactory', ['getMimeType']);
         $this->mSplFileInfo = $this
             ->getMockBuilder('\SplFileInfo')
             ->disableOriginalConstructor()

@@ -1,8 +1,8 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Service;
+namespace BlackBoxCode\Pando\ContentBundle\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockVariableDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\BlockDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\BlockVariableDocument;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class BlockVariableService

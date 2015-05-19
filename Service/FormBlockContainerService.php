@@ -1,5 +1,5 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Service;
+namespace BlackBoxCode\Pando\ContentBundle\Service;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\Form\FormInterface;

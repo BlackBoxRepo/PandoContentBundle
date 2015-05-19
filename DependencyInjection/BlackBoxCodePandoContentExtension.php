@@ -1,6 +1,6 @@
 <?php
 
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\DependencyInjection;
+namespace BlackBoxCode\Pando\ContentBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

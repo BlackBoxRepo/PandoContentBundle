@@ -1,10 +1,10 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
+namespace BlackBoxCode\Pando\ContentBundle\Tests\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\PageDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\FormDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\FormPageDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Service\ForwardResolverService;
+use BlackBoxCode\Pando\ContentBundle\Document\PageDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\FormDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\FormPageDocument;
+use BlackBoxCode\Pando\ContentBundle\Service\ForwardResolverService;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class ForwardResolverServiceTest extends \PHPUnit_Framework_TestCase
@@ -35,13 +35,13 @@ class ForwardResolverServiceTest extends \PHPUnit_Framework_TestCase
     {
         $this->forwardResolverService = new ForwardResolverService();
 
-        $this->mPageDocument = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Document\PageDocument');
+        $this->mPageDocument = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\PageDocument');
 
         $this->form1 = new FormDocument();
         $this->form2 = new FormDocument();
 
-        $this->mFormPage1 = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Document\FormPageDocument');
-        $this->mFormPage2 = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Document\FormPageDocument');
+        $this->mFormPage1 = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\FormPageDocument');
+        $this->mFormPage2 = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\FormPageDocument');
 
         $this->formPages = new ArrayCollection();
         $this->formPages->add($this->mFormPage1);
@@ -120,7 +120,7 @@ class ForwardResolverServiceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\NoFormPageException
+     * @expectedException BlackBoxCode\Pando\ContentBundle\Exception\Service\NoFormPageException
      */
     public function resolve_noFormPages()
     {
@@ -135,7 +135,7 @@ class ForwardResolverServiceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\NoFormPageException
+     * @expectedException BlackBoxCode\Pando\ContentBundle\Exception\Service\NoFormPageException
      */
     public function resolve_incorrectFormPage()
     {

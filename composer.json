@@ -26,6 +26,6 @@
         "blackboxcode/pando-base-bundle": "dev-master"
     },
     "autoload": {
-        "psr-4": {"BlackBoxCode\\Pando\\Bundle\\ContentBundle\\": ""}
+        "psr-4": {"BlackBoxCode\\Pando\\ContentBundle\\": ""}
     }
 }

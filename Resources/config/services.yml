@@ -1,7 +1,7 @@
 parameters:
-    pando_content_bundle.service.method.class: BlackBoxCode\Pando\Bundle\ContentBundle\Service\MethodService
-    pando_content_bundle.service.form_block_container.class: BlackBoxCode\Pando\Bundle\ContentBundle\Service\FormBlockContainerService
-    pando_content_bundle.service.block_variable.class: BlackBoxCode\Pando\Bundle\ContentBundle\Service\BlockVariableService
+    pando_content_bundle.service.method.class: BlackBoxCode\Pando\ContentBundle\Service\MethodService
+    pando_content_bundle.service.form_block_container.class: BlackBoxCode\Pando\ContentBundle\Service\FormBlockContainerService
+    pando_content_bundle.service.block_variable.class: BlackBoxCode\Pando\ContentBundle\Service\BlockVariableService
 
 services:
     pando_content_bundle.method_service:

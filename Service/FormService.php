@@ -1,8 +1,8 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Service;
+namespace BlackBoxCode\Pando\ContentBundle\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\FormDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\PageDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\FormDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\PageDocument;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class FormService

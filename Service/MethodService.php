@@ -1,15 +1,15 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Service;
+namespace BlackBoxCode\Pando\ContentBundle\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodArgumentDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\BadArgumentTypeException;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\BadMethodCallException;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\MissingMethodArgumentException;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\UndefinedServiceException;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Exception\Service\WrongNumberOfArgumentsException;
+use BlackBoxCode\Pando\ContentBundle\Document\MethodArgumentDocument;
+use BlackBoxCode\Pando\ContentBundle\Exception\Service\BadArgumentTypeException;
+use BlackBoxCode\Pando\ContentBundle\Exception\Service\BadMethodCallException;
+use BlackBoxCode\Pando\ContentBundle\Exception\Service\MissingMethodArgumentException;
+use BlackBoxCode\Pando\ContentBundle\Exception\Service\UndefinedServiceException;
+use BlackBoxCode\Pando\ContentBundle\Exception\Service\WrongNumberOfArgumentsException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\DependencyInjection\Container;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\MethodDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\MethodDocument;
 
 class MethodService
 {

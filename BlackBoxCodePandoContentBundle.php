@@ -1,6 +1,6 @@
 <?php
 
-namespace BlackBoxCode\Pando\Bundle\ContentBundle;
+namespace BlackBoxCode\Pando\ContentBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

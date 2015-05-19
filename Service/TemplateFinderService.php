@@ -1,8 +1,8 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Service;
+namespace BlackBoxCode\Pando\ContentBundle\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\AbstractPhpcrDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\PageDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\AbstractPhpcrDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\PageDocument;
 use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 use Symfony\Cmf\Component\Routing\Enhancer\RouteEnhancerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;

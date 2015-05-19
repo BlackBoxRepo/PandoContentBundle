@@ -1,13 +1,13 @@
 <?php
-namespace BlackBoxCode\Pando\Bundle\ContentBundle\Tests\Service;
+namespace BlackBoxCode\Pando\ContentBundle\Tests\Service;
 
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockVariableDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Document\TemplateDocument;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Service\BlockVariableService;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Service\FormBlockContainerService;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Service\FormService;
-use BlackBoxCode\Pando\Bundle\ContentBundle\Service\DynamicBlockService;
+use BlackBoxCode\Pando\ContentBundle\Document\BlockDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\BlockVariableDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\TemplateDocument;
+use BlackBoxCode\Pando\ContentBundle\Service\BlockVariableService;
+use BlackBoxCode\Pando\ContentBundle\Service\FormBlockContainerService;
+use BlackBoxCode\Pando\ContentBundle\Service\FormService;
+use BlackBoxCode\Pando\ContentBundle\Service\DynamicBlockService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -34,9 +34,9 @@ class DynamicBlockServiceTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->mTemplating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $this->mFormService = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Service\FormService');
-        $this->mBlockVariableService = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Service\BlockVariableService');
-        $this->mFormBlockContainerService = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Service\FormBlockContainerService');
+        $this->mFormService = $this->getMock('BlackBoxCode\Pando\ContentBundle\Service\FormService');
+        $this->mBlockVariableService = $this->getMock('BlackBoxCode\Pando\ContentBundle\Service\BlockVariableService');
+        $this->mFormBlockContainerService = $this->getMock('BlackBoxCode\Pando\ContentBundle\Service\FormBlockContainerService');
 
         $this->dynamicBlockService = new DynamicBlockService();
         $this->dynamicBlockService
@@ -53,10 +53,10 @@ class DynamicBlockServiceTest extends \PHPUnit_Framework_TestCase
     public function execute()
     {
         /** @var \PHPUnit_Framework_MockObject_MockObject|TemplateDocument $template */
-        $mTemplate = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Document\TemplateDocument');
+        $mTemplate = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\TemplateDocument');
 
         /** @var \PHPUnit_Framework_MockObject_MockObject|BlockDocument $block */
-        $mBlock = $this->getMock('BlackBoxCode\Pando\Bundle\ContentBundle\Document\BlockDocument');
+        $mBlock = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\BlockDocument');
 
         /** @var \PHPUnit_Framework_MockObject_MockObject|BlockContextInterface $mBlockContext */
         $mBlockContext = $this->getMock('Sonata\BlockBundle\Block\BlockContextInterface');
