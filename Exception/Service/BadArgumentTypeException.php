@@ -1,9 +1,9 @@
 <?php
 namespace BlackBoxCode\Pando\ContentBundle\Exception\Service;
 
-use BlackBoxCode\Pando\BaseBundle\Exception\BaseException;
+use BlackBoxCode\Pando\ContentBundle\Exception\ContentBundleException;
 
-class BadArgumentTypeException extends BaseException
+class BadArgumentTypeException extends ContentBundleException
 {
 
 }
