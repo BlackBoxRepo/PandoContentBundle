@@ -5,7 +5,6 @@ use BlackBoxCode\Pando\ContentBundle\Document\BlockDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\BlockVariableDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\MethodDocument;
 use BlackBoxCode\Pando\ContentBundle\Service\BlockVariableService;
-use BlackBoxCode\Pando\ContentBundle\Service\FormBlockContainerService;
 use BlackBoxCode\Pando\ContentBundle\Service\MethodService;
 use Doctrine\Common\Collections\ArrayCollection;
 
