@@ -40,6 +40,11 @@ class BlockDocument extends AbstractBlock
      */
     private $template;
 
+    /**
+     * @var ArrayCollection
+     */
+    private $viewVariables;
+
 
 	public function __construct()
 	{
@@ -160,6 +165,26 @@ class BlockDocument extends AbstractBlock
     public function setTemplate(TemplateDocument $template)
     {
         $this->template = $template;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getViewVariables()
+    {
+        return $this->viewVariables;
+    }
+
+    /**
+     * @param ArrayCollection $viewVariables
+     *
+     * @return $this
+     */
+    public function setViewVariables(ArrayCollection $viewVariables)
+    {
+        $this->viewVariables = $viewVariables;
 
         return $this;
     }

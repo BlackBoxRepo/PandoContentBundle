@@ -10,9 +10,6 @@ class BlockVariableService
     /** @var MethodService */
     private $methodService;
 
-    /** @var FormBlockContainerService */
-    private $formBlockContainerService;
-
 
     /**
      * @param MethodService $methodService
@@ -27,19 +24,7 @@ class BlockVariableService
     }
 
     /**
-     * @param FormBlockContainerService $formBlockContainerService
-     *
-     * @return $this
-     */
-    public function setFormBlockContainerService(FormBlockContainerService $formBlockContainerService)
-    {
-        $this->formBlockContainerService = $formBlockContainerService;
-
-        return $this;
-    }
-
-    /**
-     * Returns an ArrayCollection where the keys are the BlockVariableDocument names
+     * Sets the blocks viewVariables where the keys are the BlockVariableDocument names
      * and the values are the return of the associated method
      *
      * @param BlockDocument $block
@@ -48,13 +33,13 @@ class BlockVariableService
      */
     public function populateBlockVariables(BlockDocument $block)
     {
-        $results = new ArrayCollection();
+        $viewVariables = new ArrayCollection();
 
         /** @var BlockVariableDocument $variable */
         foreach ($block->getVariables() as $variable) {
-            $results->set($variable->getName(), $this->methodService->call($variable->getMethod()));
+            $viewVariables->set($variable->getName(), $this->methodService->call($variable->getMethod()));
         }
 
-        return $results;
+        $block->setViewVariables($viewVariables);
     }
 }

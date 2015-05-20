@@ -14,9 +14,6 @@ class BlockVariableServiceTest extends \PHPUnit_Framework_TestCase
     /** @var BlockVariableService */
     private $blockVariableService;
 
-    /** @var \PHPUnit_Framework_MockObject_MockObject|FormBlockContainerService */
-    private $mFormBlockContainerService;
-
     /** @var \PHPUnit_Framework_MockObject_MockObject|MethodService */
     private $mMethodService;
 
@@ -24,13 +21,9 @@ class BlockVariableServiceTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->mMethodService = $this->getMock('BlackBoxCode\Pando\ContentBundle\Service\MethodService');
-        $this->mFormBlockContainerService = $this->getMock('BlackBoxCode\Pando\ContentBundle\Service\FormBlockContainerService');
 
         $this->blockVariableService = new BlockVariableService();
-        $this->blockVariableService
-            ->setFormBlockContainerService($this->mFormBlockContainerService)
-            ->setMethodService($this->mMethodService)
-        ;
+        $this->blockVariableService->setMethodService($this->mMethodService);
     }
 
     /**
@@ -66,11 +59,13 @@ class BlockVariableServiceTest extends \PHPUnit_Framework_TestCase
             )
         ;
 
-        $return = $this->blockVariableService->populateBlockVariables($block);
-        $this->assertInstanceOf(get_class(new ArrayCollection([])), $return);
-        $this->assertArrayHasKey($variable1->getName(), $return);
-        $this->assertArrayHasKey($variable2->getName(), $return);
-        $this->assertContains('abc', $return);
-        $this->assertContains(['a', 'b', 'c'], $return);
+        $this->blockVariableService->populateBlockVariables($block);
+
+        $viewVariables = $block->getViewVariables();
+        $this->assertInstanceOf(get_class(new ArrayCollection([])), $viewVariables);
+        $this->assertArrayHasKey($variable1->getName(), $viewVariables);
+        $this->assertArrayHasKey($variable2->getName(), $viewVariables);
+        $this->assertContains('abc', $viewVariables);
+        $this->assertContains(['a', 'b', 'c'], $viewVariables);
     }
 }
