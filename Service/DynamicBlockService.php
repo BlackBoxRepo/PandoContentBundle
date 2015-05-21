@@ -22,8 +22,8 @@ class DynamicBlockService extends BaseBlockService
     /** @var BlockVariableService */
     private $blockVariableService;
 
-    /** @var FormBlockContainerService */
-    private $formBlockContainerService;
+    /** @var FormContainerService */
+    private $formContainerService;
 
     /**
      * This shouldn't do anything
@@ -82,13 +82,13 @@ class DynamicBlockService extends BaseBlockService
     }
 
     /**
-     * @param FormBlockContainerService $formBlockContainerService
+     * @param FormContainerService $formContainerService
      *
      * @return $this
      */
-    public function setFormBlockContainerService(FormBlockContainerService $formBlockContainerService)
+    public function setFormContainerService(FormContainerService $formContainerService)
     {
-        $this->formBlockContainerService = $formBlockContainerService;
+        $this->formContainerService = $formContainerService;
 
         return $this;
     }
@@ -116,7 +116,9 @@ class DynamicBlockService extends BaseBlockService
      */
     public function load(BlockInterface $block)
     {
-        $this->formBlockContainerService->setBlock($block);
-        $this->blockVariableService->populateBlockVariables($block);
+        $this->blockVariableService
+            ->setBlock($block)
+            ->populateBlockVariables()
+        ;
     }
 }

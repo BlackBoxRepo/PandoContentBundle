@@ -5,7 +5,7 @@ use BlackBoxCode\Pando\ContentBundle\Document\BlockDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\BlockVariableDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\TemplateDocument;
 use BlackBoxCode\Pando\ContentBundle\Service\BlockVariableService;
-use BlackBoxCode\Pando\ContentBundle\Service\FormBlockContainerService;
+use BlackBoxCode\Pando\ContentBundle\Service\FormContainerService;
 use BlackBoxCode\Pando\ContentBundle\Service\FormService;
 use BlackBoxCode\Pando\ContentBundle\Service\DynamicBlockService;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -27,8 +27,8 @@ class DynamicBlockServiceTest extends \PHPUnit_Framework_TestCase
     /** @var \PHPUnit_Framework_MockObject_MockObject|BlockVariableService */
     private $mBlockVariableService;
 
-    /** @var \PHPUnit_Framework_MockObject_MockObject|FormBlockContainerService */
-    private $mFormBlockContainerService;
+    /** @var \PHPUnit_Framework_MockObject_MockObject|FormContainerService */
+    private $mFormContainerService;
 
 
     public function setUp()
@@ -36,14 +36,14 @@ class DynamicBlockServiceTest extends \PHPUnit_Framework_TestCase
         $this->mTemplating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $this->mFormService = $this->getMock('BlackBoxCode\Pando\ContentBundle\Service\FormService');
         $this->mBlockVariableService = $this->getMock('BlackBoxCode\Pando\ContentBundle\Service\BlockVariableService');
-        $this->mFormBlockContainerService = $this->getMock('BlackBoxCode\Pando\ContentBundle\Service\FormBlockContainerService');
+        $this->mFormContainerService = $this->getMock('BlackBoxCode\Pando\ContentBundle\Service\FormContainerService');
 
         $this->dynamicBlockService = new DynamicBlockService();
         $this->dynamicBlockService
             ->setTemplating($this->mTemplating)
             ->setFormService($this->mFormService)
             ->setBlockVariableService($this->mBlockVariableService)
-            ->setFormBlockContainerService($this->mFormBlockContainerService)
+            ->setFormContainerService($this->mFormContainerService)
         ;
     }
 
@@ -118,16 +118,16 @@ class DynamicBlockServiceTest extends \PHPUnit_Framework_TestCase
     {
         $block = new BlockDocument();
 
-        $this->mFormBlockContainerService
+        $this->mBlockVariableService
             ->expects($this->once())
             ->method('setBlock')
             ->with($block)
+            ->willReturn($this->mBlockVariableService)
         ;
 
         $this->mBlockVariableService
             ->expects($this->once())
             ->method('populateBlockVariables')
-            ->with($block)
         ;
 
         $this->dynamicBlockService->load($block);

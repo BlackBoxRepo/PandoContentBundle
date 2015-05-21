@@ -10,8 +10,8 @@ class FormService
     /** @var MethodService */
     private $methodService;
 
-    /** @var FormBlockContainerService */
-    private $formBlockContainerService;
+    /** @var FormContainerService */
+    private $formContainerService;
 
     /** @var RequestStack */
     private $requestStack;
@@ -29,13 +29,13 @@ class FormService
     }
 
     /**
-     * @param FormBlockContainerService $formBlockContainerService
+     * @param FormContainerService $formContainerService
      *
      * @return $this
      */
-    public function setFormBlockContainerService(FormBlockContainerService $formBlockContainerService)
+    public function setFormContainerService(FormContainerService $formContainerService)
     {
-        $this->formBlockContainerService = $formBlockContainerService;
+        $this->formContainerService = $formContainerService;
 
         return $this;
     }

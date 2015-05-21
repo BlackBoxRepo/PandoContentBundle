@@ -1,16 +1,12 @@
 <?php
 namespace BlackBoxCode\Pando\ContentBundle\Service;
 
-use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\Form\FormInterface;
 
-class FormBlockContainerService
+class FormContainerService
 {
     /** @var FormInterface */
     private $form;
-
-    /** @var BlockInterface */
-    private $block;
 
 
     /**
@@ -29,26 +25,6 @@ class FormBlockContainerService
     public function setForm(FormInterface $form)
     {
         $this->form = $form;
-
-        return $this;
-    }
-
-    /**
-     * @return BlockInterface
-     */
-    public function getBlock()
-    {
-        return $this->block;
-    }
-
-    /**
-     * @param BlockInterface $block
-     *
-     * @return $this
-     */
-    public function setBlock(BlockInterface $block)
-    {
-        $this->block = $block;
 
         return $this;
     }
