@@ -83,13 +83,9 @@ class FormService
     {
         $hasMethods = false;
 
-        /** @var FormDocument $form */
         $form = $this->formContainerService->getForm();
         if ($form->isSubmitted()) {
-            $formBlockMethods = array_merge(
-                $form->getFormBlockMethods()->toArray(),
-                $block->getFormBlockMethods()->toArray()
-            );
+            $formBlockMethods = $block->getFormBlockMethods();
 
             /** @var FormBlockMethodDocument $formBlockMethod */
             foreach ($formBlockMethods as $formBlockMethod) {

@@ -3,7 +3,6 @@ namespace BlackBoxCode\Pando\ContentBundle\Tests\Service;
 
 use BlackBoxCode\Pando\ContentBundle\Document\BlockDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\FormBlockMethodDocument;
-use BlackBoxCode\Pando\ContentBundle\Document\FormDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\FormPageDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\MethodDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\PageDocument;
@@ -57,8 +56,8 @@ class FormServiceTest extends \PHPUnit_Framework_TestCase
 
     public function processBlock_formNotSubmitted()
     {
-        /** @var \PHPUnit_Framework_MockObject_MockObject|FormDocument **/
-        $mForm = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\FormDocument');
+        /** @var \PHPUnit_Framework_MockObject_MockObject|FormInterface $mForm */
+        $mForm = $this->getMock('Symfony\Component\Form\FormInterface');
 
         $this->mFormContainerService
             ->expects($this->once())
@@ -81,8 +80,8 @@ class FormServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function processBlock_notSubmitted()
     {
-        /** @var \PHPUnit_Framework_MockObject_MockObject|FormDocument **/
-        $mForm = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\FormDocument');
+        /** @var \PHPUnit_Framework_MockObject_MockObject|FormInterface $mForm */
+        $mForm = $this->getMock('Symfony\Component\Form\FormInterface');
 
         $this->mFormContainerService
             ->expects($this->once())
@@ -108,8 +107,8 @@ class FormServiceTest extends \PHPUnit_Framework_TestCase
         $block = new BlockDocument();
         $block->addFormBlockMethod(new FormBlockMethodDocument());
 
-        /** @var \PHPUnit_Framework_MockObject_MockObject|FormDocument **/
-        $mForm = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\FormDocument', ['isSubmitted']);
+        /** @var \PHPUnit_Framework_MockObject_MockObject|FormInterface $mForm */
+        $mForm = $this->getMock('Symfony\Component\Form\FormInterface');
 
         $this->mFormContainerService
             ->expects($this->once())
@@ -139,11 +138,13 @@ class FormServiceTest extends \PHPUnit_Framework_TestCase
         $formBlockMethodDocument2->setMethod(new MethodDocument());
 
         $block = new BlockDocument();
-        $block->addFormBlockMethod($formBlockMethodDocument1);
+        $block
+            ->addFormBlockMethod($formBlockMethodDocument1)
+            ->addFormBlockMethod($formBlockMethodDocument2)
+        ;
 
-        /** @var \PHPUnit_Framework_MockObject_MockObject|FormDocument $mForm **/
-        $mForm = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\FormDocument', ['isSubmitted']);
-        $mForm->addFormBlockMethod($formBlockMethodDocument2);
+        /** @var \PHPUnit_Framework_MockObject_MockObject|FormInterface $mForm */
+        $mForm = $this->getMock('Symfony\Component\Form\FormInterface');
 
         $this->mFormContainerService
             ->expects($this->once())
