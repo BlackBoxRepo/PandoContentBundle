@@ -1,6 +1,8 @@
 <?php
 namespace BlackBoxCode\Pando\ContentBundle\Service;
 
+use BlackBoxCode\Pando\ContentBundle\Document\BlockDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\BlockVariableDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\FormDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\PageDocument;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -52,9 +54,22 @@ class FormService
         return $this;
     }
 
-    public function processBlock()
+    public function processBlock(BlockDocument $block)
     {
+        $hasMethods = false;
+        $form = $this->formContainerService->getForm();
 
+        if ($form->isSubmitted()) {
+            /** @var BlockVariableDocument $variable */
+            foreach ($block->getVariables() as $variable) {
+                if ($method = $variable->getMethod()) {
+                    $this->methodService->call($method);
+                    $hasMethods = true;
+                }
+            }
+        }
+
+        return $hasMethods;
     }
 
     public function processFormPage(FormDocument $formDocument)

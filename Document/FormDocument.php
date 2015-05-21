@@ -21,10 +21,16 @@ class FormDocument extends AbstractPhpcrDocument
      **/
     private $formBlockMethods;
 
+    /**
+     * @var bool
+     */
+    private $submitted;
+
 
     public function __construct()
     {
         $this->formBlockMethods = new ArrayCollection();
+        $this->submitted = false;
     }
 
 	/**
@@ -76,5 +82,25 @@ class FormDocument extends AbstractPhpcrDocument
         $this->formBlockMethods->removeElement($formBlockMethod);
 
         return $this;
+    }
+
+    /**
+     * @param $submitted
+     *
+     * @return $this
+     */
+    public function setSubmitted($submitted)
+    {
+        $this->submitted = $submitted ? true : false;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSubmitted()
+    {
+        return $this->submitted;
     }
 }
