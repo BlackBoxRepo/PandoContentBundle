@@ -2,9 +2,13 @@
 namespace BlackBoxCode\Pando\ContentBundle\Service;
 
 use BlackBoxCode\Pando\ContentBundle\Document\BlockDocument;
-use BlackBoxCode\Pando\ContentBundle\Document\BlockVariableDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\FormBlockMethodDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\FormDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\FormPageDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\PageDocument;
+use BlackBoxCode\Pando\ContentBundle\Exception\Service\FormNotFoundException;
+use Symfony\Component\Form\FormFactory;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class FormService
@@ -17,6 +21,10 @@ class FormService
 
     /** @var RequestStack */
     private $requestStack;
+
+    /** @var FormFactory */
+    private $formFactory;
+
 
     /**
      * @param MethodService $methodService
@@ -54,17 +62,43 @@ class FormService
         return $this;
     }
 
+    /**
+     * @param FormFactory $formFactory
+     *
+     * @return $this
+     */
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+
+        return $this;
+    }
+
+    /**
+     * @param BlockDocument $block
+     *
+     * @return bool
+     */
     public function processBlock(BlockDocument $block)
     {
         $hasMethods = false;
-        $form = $this->formContainerService->getForm();
 
+        /** @var FormDocument $form */
+        $form = $this->formContainerService->getForm();
         if ($form->isSubmitted()) {
-            /** @var BlockVariableDocument $variable */
-            foreach ($block->getVariables() as $variable) {
-                if ($method = $variable->getMethod()) {
+            $formBlockMethods = array_merge(
+                $form->getFormBlockMethods()->toArray(),
+                $block->getFormBlockMethods()->toArray()
+            );
+
+            /** @var FormBlockMethodDocument $formBlockMethod */
+            foreach ($formBlockMethods as $formBlockMethod) {
+                if ($method = $formBlockMethod->getMethod()) {
                     $this->methodService->call($method);
-                    $hasMethods = true;
+
+                    if (!$hasMethods) {
+                        $hasMethods = true;
+                    }
                 }
             }
         }
@@ -72,18 +106,49 @@ class FormService
         return $hasMethods;
     }
 
-    public function processFormPage(FormDocument $formDocument)
+    /**
+     * @param FormPageDocument $formPageDocument
+     */
+    public function processFormPage(FormPageDocument $formPageDocument)
     {
-
+        foreach ($formPageDocument->getMethods() as $method) {
+            $this->methodService->call($method);
+        }
     }
 
-    public function getSubmittedFormName(PageDocument $page)
+    /**
+     * @return string
+     * @throws FormNotFoundException
+     */
+    public function getSubmittedFormName()
     {
+        /** @var Request $request */
+        $request = $this->requestStack->getCurrentRequest();
 
+        if ($form = $request->request->get('form')) {
+            return $form['name'];
+        }
+
+        throw new FormNotFoundException('The request does not contain a form.');
+    }
+
+    /**
+     * @param PageDocument $page
+     *
+     * @return bool
+     */
+    public function shouldFormProcess(PageDocument $page)
+    {
+        return $this->requestStack->getParentRequest() === null
+            && $this->requestStack->getCurrentRequest()->getMethod() == Request::METHOD_POST
+            && $page->getFormNames()->contains($this->getSubmittedFormName())
+        ;
     }
 
     public function handleRequest()
     {
-
+        $form = $this->formFactory->create($this->getSubmittedFormName());
+        $this->formContainerService->setForm($form);
+        $form->handleRequest($this->requestStack->getCurrentRequest());
     }
 }

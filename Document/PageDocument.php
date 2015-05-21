@@ -132,4 +132,9 @@ class PageDocument extends Page
 
         return $this;
     }
+
+    public function getFormNames()
+    {
+        return new ArrayCollection();
+    }
 }
