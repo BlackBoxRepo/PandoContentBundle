@@ -10,6 +10,9 @@ class BlockVariableService
     /** @var MethodService */
     private $methodService;
 
+    /** @var BlockDocument */
+    private $block;
+
 
     /**
      * @param MethodService $methodService
@@ -24,22 +27,53 @@ class BlockVariableService
     }
 
     /**
+     * @param BlockDocument $block
+     *
+     * @return $this
+     */
+    public function setBlock(BlockDocument $block)
+    {
+        $this->block = $block;
+
+        return $this;
+    }
+
+    /**
+     * @return BlockDocument
+     */
+    private function getBlock()
+    {
+        return $this->block;
+    }
+
+    /**
      * Sets the blocks viewVariables where the keys are the BlockVariableDocument names
      * and the values are the return of the associated method
      *
-     * @param BlockDocument $block
-     *
      * @return ArrayCollection
      */
-    public function populateBlockVariables(BlockDocument $block)
+    public function populateBlockVariables()
     {
-        $viewVariables = new ArrayCollection();
-
         /** @var BlockVariableDocument $variable */
-        foreach ($block->getVariables() as $variable) {
-            $viewVariables->set($variable->getName(), $this->methodService->call($variable->getMethod()));
+        foreach ($this->block->getVariables() as $variable) {
+            $this->setBlockVariable($variable->getName(), $this->methodService->call($variable->getMethod()));
         }
+    }
 
-        $block->setViewVariables($viewVariables);
+    /**
+     * @param string $key
+     * @param string $value
+     */
+    public function setBlockVariable($key, $value)
+    {
+        $this->getBlock()->getViewVariables()->set($key, $value);
+    }
+
+    /**
+     * @param $key
+     */
+    public function getBlockVariable($key)
+    {
+        $this->getBlock()->getViewVariables()->get($key);
     }
 }

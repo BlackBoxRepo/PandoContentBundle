@@ -50,6 +50,7 @@ class BlockDocument extends AbstractBlock
 	{
 		$this->variables = new ArrayCollection();
 		$this->formBlockMethods = new ArrayCollection();
+        $this->viewVariables = new ArrayCollection();
 	}
 
     public function getType()

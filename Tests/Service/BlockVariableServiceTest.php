@@ -48,6 +48,8 @@ class BlockVariableServiceTest extends \PHPUnit_Framework_TestCase
             ->addVariable($variable2)
         ;
 
+        $this->blockVariableService->setBlock($block);
+
         $this->mMethodService
             ->expects($this->exactly(2))
             ->method('call')
@@ -58,7 +60,7 @@ class BlockVariableServiceTest extends \PHPUnit_Framework_TestCase
             )
         ;
 
-        $this->blockVariableService->populateBlockVariables($block);
+        $this->blockVariableService->populateBlockVariables();
 
         $viewVariables = $block->getViewVariables();
         $this->assertInstanceOf(get_class(new ArrayCollection([])), $viewVariables);
