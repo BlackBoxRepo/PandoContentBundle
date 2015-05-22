@@ -7,7 +7,6 @@ use BlackBoxCode\Pando\ContentBundle\Document\BlockDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\FormDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\FormPageDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\PageDocument;
-use BlackBoxCode\Pando\ContentBundle\Exception\Controller\InvalidContentDocumentException;
 use BlackBoxCode\Pando\ContentBundle\Service\FormContainerService;
 use BlackBoxCode\Pando\ContentBundle\Service\FormService;
 use BlackBoxCode\Pando\ContentBundle\Service\ForwardResolverService;
