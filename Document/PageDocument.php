@@ -137,4 +137,29 @@ class PageDocument extends Page
     {
         return new ArrayCollection();
     }
+
+    /**
+     * @param string $formName
+     *
+     * @return FormPageDocument
+     */
+    public function getFormPageByFormName($formName)
+    {
+        if ($formPage = $this->getFormPages()->filter(
+            function($formPage) use($formName) {
+                /** @var FormDocument $form */
+                if ($form = $formPage->getForm()) {
+                    if ($form->getName() == $formName) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        )->first()) {
+            return $formPage;
+        }
+
+        return null;
+    }
 }

@@ -2,10 +2,10 @@
 namespace BlackBoxCode\Pando\ContentBundle\Tests\Service;
 
 use BlackBoxCode\Pando\ContentBundle\Document\PageDocument;
-use BlackBoxCode\Pando\ContentBundle\Document\FormDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\FormPageDocument;
 use BlackBoxCode\Pando\ContentBundle\Service\ForwardResolverService;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Form\Form;
 
 class ForwardResolverServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,20 +15,11 @@ class ForwardResolverServiceTest extends \PHPUnit_Framework_TestCase
     /** @var \PHPUnit_Framework_MockObject_MockObject|PageDocument */
     private $mPageDocument;
 
-    /** @var ArrayCollection<\PHPUnit_Framework_MockObject_MockObject|FormPageDocument> */
-    private $formPages;
+    /** @var \PHPUnit_Framework_MockObject_MockObject|Form */
+    private $mForm;
 
     /** @var \PHPUnit_Framework_MockObject_MockObject|FormPageDocument */
-    private $mFormPage1;
-
-    /** @var \PHPUnit_Framework_MockObject_MockObject|FormPageDocument */
-    private $mFormPage2;
-
-    /** @var FormDocument */
-    private $form1;
-
-    /** @var FormDocument */
-    private $form2;
+    private $mFormPage;
 
 
     public function setUp()
@@ -37,15 +28,13 @@ class ForwardResolverServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->mPageDocument = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\PageDocument');
 
-        $this->form1 = new FormDocument();
-        $this->form2 = new FormDocument();
+        $this->mForm = $this
+            ->getMockBuilder('Symfony\Component\Form\Form')
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
 
-        $this->mFormPage1 = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\FormPageDocument');
-        $this->mFormPage2 = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\FormPageDocument');
-
-        $this->formPages = new ArrayCollection();
-        $this->formPages->add($this->mFormPage1);
-        $this->formPages->add($this->mFormPage2);
+        $this->mFormPage = $this->getMock('BlackBoxCode\Pando\ContentBundle\Document\FormPageDocument');
     }
 
     /**
@@ -53,33 +42,29 @@ class ForwardResolverServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function resolve_success()
     {
+        $formName = 'the_form';
         $successPage = new PageDocument();
+
+        $this->mForm
+            ->expects($this->once())
+            ->method('getName')
+            ->willReturn($formName)
+        ;
 
         $this->mPageDocument
             ->expects($this->once())
-            ->method('getFormPages')
-            ->willReturn($this->formPages)
+            ->method('getFormPageByFormName')
+            ->with($formName)
+            ->willReturn($this->mFormPage)
         ;
 
-        $this->mFormPage1
-            ->expects($this->once())
-            ->method('getForm')
-            ->willReturn($this->form1)
-        ;
-
-        $this->mFormPage2
-            ->expects($this->once())
-            ->method('getForm')
-            ->willReturn($this->form2)
-        ;
-
-        $this->mFormPage1
+        $this->mFormPage
             ->expects($this->once())
             ->method('getSuccessPage')
             ->willReturn($successPage)
         ;
 
-        $return = $this->forwardResolverService->resolve($this->mPageDocument, $this->form1, true);
+        $return = $this->forwardResolverService->resolve($this->mPageDocument, $this->mForm, true);
         $this->assertSame($successPage, $return);
     }
 
@@ -88,33 +73,29 @@ class ForwardResolverServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function resolve_failure()
     {
+        $formName = 'the_form';
         $failurePage = new PageDocument();
+
+        $this->mForm
+            ->expects($this->once())
+            ->method('getName')
+            ->willReturn($formName)
+        ;
 
         $this->mPageDocument
             ->expects($this->once())
-            ->method('getFormPages')
-            ->willReturn($this->formPages)
+            ->method('getFormPageByFormName')
+            ->with($formName)
+            ->willReturn($this->mFormPage)
         ;
 
-        $this->mFormPage1
-            ->expects($this->once())
-            ->method('getForm')
-            ->willReturn($this->form1)
-        ;
-
-        $this->mFormPage2
-            ->expects($this->once())
-            ->method('getForm')
-            ->willReturn($this->form2)
-        ;
-
-        $this->mFormPage2
+        $this->mFormPage
             ->expects($this->once())
             ->method('getFailurePage')
             ->willReturn($failurePage)
         ;
 
-        $return = $this->forwardResolverService->resolve($this->mPageDocument, $this->form2, false);
+        $return = $this->forwardResolverService->resolve($this->mPageDocument, $this->mForm, false);
         $this->assertSame($failurePage, $return);
     }
 
@@ -124,29 +105,21 @@ class ForwardResolverServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function resolve_noFormPages()
     {
-        $this->mPageDocument
+        $formName = 'the_form';
+
+        $this->mForm
             ->expects($this->once())
-            ->method('getFormPages')
-            ->willReturn(new ArrayCollection())
+            ->method('getName')
+            ->willReturn($formName)
         ;
-
-        $this->forwardResolverService->resolve($this->mPageDocument, $this->form2, false);
-    }
-
-    /**
-     * @test
-     * @expectedException BlackBoxCode\Pando\ContentBundle\Exception\Service\NoFormPageException
-     */
-    public function resolve_incorrectFormPage()
-    {
-        $this->formPages->remove(0);
 
         $this->mPageDocument
             ->expects($this->once())
-            ->method('getFormPages')
-            ->willReturn($this->formPages)
+            ->method('getFormPageByFormName')
+            ->with($formName)
+            ->willReturn(null)
         ;
 
-        $this->forwardResolverService->resolve($this->mPageDocument, $this->form1, false);
+        $this->forwardResolverService->resolve($this->mPageDocument, $this->mForm, false);
     }
 }
