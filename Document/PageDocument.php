@@ -135,7 +135,16 @@ class PageDocument extends Page
 
     public function getFormNames()
     {
-        return new ArrayCollection();
+        $formNames = new ArrayCollection();
+
+        foreach($this->getFormPages() as $formPage) {
+            /** @var FormDocument $form */
+            if ($form = $formPage->getForm()) {
+                $formNames->add($form->getName());
+            }
+        }
+
+        return $formNames;
     }
 
     /**

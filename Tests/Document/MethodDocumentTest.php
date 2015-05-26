@@ -4,7 +4,7 @@ namespace BlackBoxCode\Pando\ContentBundle\Tests\Service;
 use BlackBoxCode\Pando\ContentBundle\Document\MethodDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\MethodArgumentDocument;
 
-class MethodTest extends \PHPUnit_Framework_TestCase
+class MethodDocumentTest extends \PHPUnit_Framework_TestCase
 {
     /** @var MethodDocument */
     private $method;
