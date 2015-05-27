@@ -1,5 +1,2 @@
 services:
-    pando_content_bundle.unique_document_validator:
-        class: BlackBoxCode\Pando\ContentBundle\Service\UniqueDocumentValidatorService
-        calls:
-            - ['setReader', [@annotation_reader]]
+
