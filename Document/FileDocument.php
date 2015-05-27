@@ -9,5 +9,18 @@ use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\File;
  */
 class FileDocument extends File
 {
+    /**
+     * @PHPCR\Uuid
+     * @var string
+     */
+    protected $uuid;
 
+
+    /**
+     * @return string
+     */
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
 }

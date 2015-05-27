@@ -11,16 +11,10 @@ use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
 class PageDocument extends Page
 {
     /**
-     * @PHPCR\Id
+     * @PHPCR\Uuid
      * @var string
-     **/
-	protected $id;
-
-    /**
-     * @PHPCR\String
-     * @var string
-     **/
-	protected $name;
+     */
+    protected $uuid;
 
 	/**
      * @PHPCR\ReferenceMany(targetDocument="BlockDocument", strategy="hard")
@@ -41,32 +35,20 @@ class PageDocument extends Page
         $this->formPages = new ArrayCollection();
 	}
 
+    /**
+     * @return string
+     */
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
 	/**
 	 * @return string
 	 */
 	public function getId()
 	{
 		return $this->id;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->name;
-	}
-
-	/**
-	 * @param string $name
-     *
-	 * @return $this
-	 */
-	public function setName($name)
-	{
-		$this->name = $name;
-
-		return $this;
 	}
 
 	/**

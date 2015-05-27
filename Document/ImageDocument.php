@@ -9,5 +9,18 @@ use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image as BaseImage;
  */
 class ImageDocument extends BaseImage
 {
+    /**
+     * @PHPCR\Uuid
+     * @var string
+     */
+    protected $uuid;
 
+
+    /**
+     * @return string
+     */
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
 }

@@ -1,20 +1,5 @@
-parameters:
-    pando_content_bundle.service.method.class: BlackBoxCode\Pando\ContentBundle\Service\MethodService
-    pando_content_bundle.service.form_block_container.class: BlackBoxCode\Pando\ContentBundle\Service\FormBlockContainerService
-    pando_content_bundle.service.block_variable.class: BlackBoxCode\Pando\ContentBundle\Service\BlockVariableService
-
 services:
-    pando_content_bundle.method_service:
-        class: "%pando_content_bundle.service.method.class%"
+    pando_content_bundle.unique_document_validator:
+        class: BlackBoxCode\Pando\ContentBundle\Service\UniqueDocumentValidatorService
         calls:
-            - ['setContainer', [@service_container]]
-
-    pando_content_bundle.form_block_container_service:
-        class: "%pando_content_bundle.service.form_block_container.class%"
-        scope: request
-
-    pando_content_bundle.block_variable_service:
-        class: "@pando_content_bundle.service.block_variable.class%"
-        calls:
-            - ['setMethodService', [@pando_content_bundle.method_service]]
-            - ['setFormBlockContainerService', [@pando_content_bundle.form_block_container_service]]
+            - ['setReader', [@annotation_reader]]

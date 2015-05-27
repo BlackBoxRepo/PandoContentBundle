@@ -12,10 +12,16 @@ abstract class AbstractPhpcrDocument implements PrefixInterface, HierarchyInterf
 
 
     /**
+     * @PHPCR\Uuid
+     * @var string
+     */
+    protected $uuid;
+
+    /**
      * @PHPCR\Id
      * @var string
      **/
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -31,9 +37,29 @@ abstract class AbstractPhpcrDocument implements PrefixInterface, HierarchyInterf
     /**
      * @return string
      */
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * @return string
+     */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**

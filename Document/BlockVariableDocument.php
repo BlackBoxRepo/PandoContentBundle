@@ -2,9 +2,13 @@
 namespace BlackBoxCode\Pando\ContentBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+use BlackBoxCode\Pando\ContentBundle\Annotation\UniqueDocument;
 
 /**
  * @PHPCR\Document(referenceable=true)
+ * @UniqueDocument(
+ *     fields={"name", "block"}
+ * )
  */
 class BlockVariableDocument extends AbstractPhpcrDocument
 {

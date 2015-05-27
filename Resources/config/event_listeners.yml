@@ -1,0 +1,7 @@
+services:
+    pando_content_bundle.unique_document_subscriber:
+        class: BlackBoxCode\Pando\ContentBundle\EventListener\UniqueDocumentSubscriber
+        tags:
+            - { name: doctrine_phpcr.event_subscriber }
+        calls:
+            - ['setUniqueDocumentValidatorService', [@pando_content_bundle.unique_document_validator]]

@@ -10,17 +10,11 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\AbstractBlock;
  */
 class BlockDocument extends AbstractBlock
 {
-	/**
-     * @PHPCR\Id
+    /**
+     * @PHPCR\Uuid
      * @var string
-     **/
-	protected $id;
-
-	/**
-     * @PHPCR\String
-     * @var string
-     **/
-    protected $name;
+     */
+    protected $uuid;
 
 	/**
      * @PHPCR\Referrers(referringDocument="BlockVariableDocument", referencedBy="block")
@@ -56,6 +50,14 @@ class BlockDocument extends AbstractBlock
     public function getType()
     {
         return 'pando_content_bundle.block.dynamic';
+    }
+
+    /**
+     * @return string
+     */
+    public function getUuid()
+    {
+        return $this->uuid;
     }
 
 	/**

@@ -4,7 +4,10 @@ namespace BlackBoxCode\Pando\ContentBundle\Document;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 
 /**
- * @PHPCR\Document(referenceable=true)
+ * @PHPCR\Document(
+ *     referenceable=true,
+ *     mixins={"mix:lastModified"}
+ * )
  */
 class TemplateDocument extends AbstractPhpcrDocument
 {
