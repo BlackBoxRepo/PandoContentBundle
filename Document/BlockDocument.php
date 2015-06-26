@@ -49,7 +49,7 @@ class BlockDocument extends AbstractBlock
 
     public function getType()
     {
-        return 'pando_content_bundle.block.dynamic';
+        return 'BlackBoxCode.Pando.ContentBundle.Service.DynamicBlockService';
     }
 
     /**

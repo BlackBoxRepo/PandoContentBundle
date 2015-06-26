@@ -1,5 +1,7 @@
 parameters:
     BlackBoxCode.Pando.ContentBundle.Controller.DefaultController.class: BlackBoxCode\Pando\ContentBundle\Controller\DefaultController
+    BlackBoxCode.Pando.ContentBundle.Service.BlockVariableService.class: BlackBoxCode\Pando\ContentBundle\Service\BlockVariableService
+    BlackBoxCode.Pando.ContentBundle.Service.DynamicBlockService.class: BlackBoxCode\Pando\ContentBundle\Service\DynamicBlockService
     BlackBoxCode.Pando.ContentBundle.Service.FormService.class: BlackBoxCode\Pando\ContentBundle\Service\FormService
     BlackBoxCode.Pando.ContentBundle.Service.FormContainerService.class: BlackBoxCode\Pando\ContentBundle\Service\FormContainerService
     BlackBoxCode.Pando.ContentBundle.Service.MethodService.class: BlackBoxCode\Pando\ContentBundle\Service\MethodService
@@ -25,3 +27,14 @@ services:
             - ['setContainer', ["@service_container"]]
     BlackBoxCode.Pando.ContentBundle.Service.FormContainerService:
         class: "%BlackBoxCode.Pando.ContentBundle.Service.FormContainerService.class%"
+    BlackBoxCode.Pando.ContentBundle.Service.DynamicBlockService:
+        class: "%BlackBoxCode.Pando.ContentBundle.Service.DynamicBlockService.class%"
+        calls:
+            - ['setTemplating', ["@templating"]]
+            - ['setBlockVariableService', ["@BlackBoxCode.Pando.ContentBundle.Service.BlockVariableService"]]
+            - ['setFormService', ["@BlackBoxCode.Pando.ContentBundle.Service.FormService"]]
+            - ['setFormContainerService', ["@BlackBoxCode.Pando.ContentBundle.Service.FormContainerService"]]
+    BlackBoxCode.Pando.ContentBundle.Service.BlockVariableService:
+        class: "%BlackBoxCode.Pando.ContentBundle.Service.BlockVariableService.class%"
+        calls:
+            - ['setMethodService', ["@BlackBoxCode.Pando.ContentBundle.Service.MethodService"]]
