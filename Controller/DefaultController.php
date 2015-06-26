@@ -14,13 +14,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 class DefaultController extends ContentController
 {
     const GLOBAL_CONTROLLER_ACTION = 'cmf_content.controller:indexAction';
 
-    /** @var KernelInterface */
+    /** @var HttpKernelInterface */
     private $kernel;
 
     /** @var FormService */
@@ -46,11 +45,11 @@ class DefaultController extends ContentController
 
 
     /**
-     * @param KernelInterface $kernel
+     * @param HttpKernelInterface $kernel
      *
      * @return $this
      */
-    public function setKernel(KernelInterface $kernel)
+    public function setKernel(HttpKernelInterface $kernel)
     {
         $this->kernel = $kernel;
 
