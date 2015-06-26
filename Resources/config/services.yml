@@ -1,40 +1,49 @@
 parameters:
-    BlackBoxCode.Pando.ContentBundle.Controller.DefaultController.class: BlackBoxCode\Pando\ContentBundle\Controller\DefaultController
-    BlackBoxCode.Pando.ContentBundle.Service.BlockVariableService.class: BlackBoxCode\Pando\ContentBundle\Service\BlockVariableService
-    BlackBoxCode.Pando.ContentBundle.Service.DynamicBlockService.class: BlackBoxCode\Pando\ContentBundle\Service\DynamicBlockService
-    BlackBoxCode.Pando.ContentBundle.Service.FormService.class: BlackBoxCode\Pando\ContentBundle\Service\FormService
-    BlackBoxCode.Pando.ContentBundle.Service.FormContainerService.class: BlackBoxCode\Pando\ContentBundle\Service\FormContainerService
-    BlackBoxCode.Pando.ContentBundle.Service.MethodService.class: BlackBoxCode\Pando\ContentBundle\Service\MethodService
+    black_box_code.pando.content_bundle.controller.default_controller.class: BlackBoxCode\Pando\ContentBundle\Controller\DefaultController
+    black_box_code.pando.content_bundle.service.block_variable_service.class: BlackBoxCode\Pando\ContentBundle\Service\BlockVariableService
+    black_box_code.pando.content_bundle.service.dynamic_block_service.class: BlackBoxCode\Pando\ContentBundle\Service\DynamicBlockService
+    black_box_code.pando.content_bundle.service.form_service.class: BlackBoxCode\Pando\ContentBundle\Service\FormService
+    black_box_code.pando.content_bundle.service.form_container_service.class: BlackBoxCode\Pando\ContentBundle\Service\FormContainerService
+    black_box_code.pando.content_bundle.service.method_service.class: BlackBoxCode\Pando\ContentBundle\Service\MethodService
+    black_box_code.pando.content_bundle.twig.loader.phpcr_loader.class: BlackBoxCode\Pando\ContentBundle\Twig\Loader\PhpcrLoader
 services:
     cmf_content.controller:
-        class: "%BlackBoxCode.Pando.ContentBundle.Controller.DefaultController.class%"
+        class: "%black_box_code.pando.content_bundle.controller.default_controller.class%"
         arguments: ["@templating", "%cmf_content.default_template%", "@fos_rest.view_handler"]
         calls:
-            - ['setFormService', ["@BlackBoxCode.Pando.ContentBundle.Service.FormService"]]
+            - ['setFormservice', ["@black_box_code.pando.content_bundle.service.form_service"]]
             - ['setKernel', ["@http_kernel"]]
             - ['setRequestStack', ["@request_stack"]]
             - ['setDynamicRouter', ["@cmf_routing.dynamic_router"]]
-    BlackBoxCode.Pando.ContentBundle.Service.FormService:
-        class: "%BlackBoxCode.Pando.ContentBundle.Service.FormService.class%"
+    black_box_code.pando.content_bundle.service.form_service:
+        class: "%black_box_code.pando.content_bundle.service.form_service.class%"
         calls:
-            - ['setMethodService', ["@BlackBoxCode.Pando.ContentBundle.Service.MethodService"]]
-            - ['setFormContainerService', ["@BlackBoxCode.Pando.ContentBundle.Service.FormContainerService"]]
+            - ['setMethodservice', ["@black_box_code.pando.content_bundle.service.method_service"]]
+            - ['setFormContainerservice', ["@black_box_code.pando.content_bundle.service.form_container_service"]]
             - ['setRequestStack', ["@request_stack"]]
             - ['setFormFactory', ["@form.factory"]]
-    BlackBoxCode.Pando.ContentBundle.Service.MethodService:
-        class: "%BlackBoxCode.Pando.ContentBundle.Service.MethodService.class%"
+    black_box_code.pando.content_bundle.service.method_service:
+        class: "%black_box_code.pando.content_bundle.service.method_service.class%"
         calls:
             - ['setContainer', ["@service_container"]]
-    BlackBoxCode.Pando.ContentBundle.Service.FormContainerService:
-        class: "%BlackBoxCode.Pando.ContentBundle.Service.FormContainerService.class%"
-    BlackBoxCode.Pando.ContentBundle.Service.DynamicBlockService:
-        class: "%BlackBoxCode.Pando.ContentBundle.Service.DynamicBlockService.class%"
+    black_box_code.pando.content_bundle.service.form_container_service:
+        class: "%black_box_code.pando.content_bundle.service.form_container_service.class%"
+    black_box_code.pando.content_bundle.service.dynamic_block_service:
+        class: "%black_box_code.pando.content_bundle.service.dynamic_block_service.class%"
         calls:
             - ['setTemplating', ["@templating"]]
-            - ['setBlockVariableService', ["@BlackBoxCode.Pando.ContentBundle.Service.BlockVariableService"]]
-            - ['setFormService', ["@BlackBoxCode.Pando.ContentBundle.Service.FormService"]]
-            - ['setFormContainerService', ["@BlackBoxCode.Pando.ContentBundle.Service.FormContainerService"]]
-    BlackBoxCode.Pando.ContentBundle.Service.BlockVariableService:
-        class: "%BlackBoxCode.Pando.ContentBundle.Service.BlockVariableService.class%"
+            - ['setBlockVariableservice', ["@black_box_code.pando.content_bundle.service.block_variable_service"]]
+            - ['setFormservice', ["@black_box_code.pando.content_bundle.service.form_service"]]
+            - ['setFormContainerservice', ["@black_box_code.pando.content_bundle.service.form_container_service"]]
+        tags:
+            - { name: 'sonata.block' }
+    black_box_code.pando.content_bundle.service.block_variable_service:
+        class: "%black_box_code.pando.content_bundle.service.block_variable_service.class%"
         calls:
-            - ['setMethodService', ["@BlackBoxCode.Pando.ContentBundle.Service.MethodService"]]
+            - ['setMethodservice', ["@black_box_code.pando.content_bundle.service.method_service"]]
+    black_box_code.pando.content_bundle.twig.loader.phpcr_loader:
+         class: "%black_box_code.pando.content_bundle.twig.loader.phpcr_loader.class%"
+         calls:
+             - ['setDocumentManager', ["@doctrine_phpcr.odm.document_manager"]]
+         tags:
+             - { name: twig.loader }

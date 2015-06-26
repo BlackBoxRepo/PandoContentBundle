@@ -2,6 +2,7 @@
 namespace BlackBoxCode\Pando\ContentBundle\Service;
 
 use BlackBoxCode\Pando\ContentBundle\Document\BlockDocument;
+use BlackBoxCode\Pando\ContentBundle\Exception\Service\MissingBlockTemplateException;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -106,7 +107,11 @@ class DynamicBlockService extends BaseBlockService
         /** @var BlockDocument $block */
         $block = $blockContext->getBlock();
         $this->formService->processBlock($block);
-        return $this->templating->renderResponse($block->getTemplate()->getName(), $block->getVariables()->toArray());
+        $template = $block->getTemplate();
+        if (is_null($template)) {
+            throw new MissingBlockTemplateException("Template must be defined on for block " . $block->getName());
+        }
+        return $this->getTemplating()->renderResponse($template->getName(), $block->getVariables()->toArray());
     }
 
     /**

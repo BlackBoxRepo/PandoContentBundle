@@ -84,7 +84,7 @@ class FormService
         $hasMethods = false;
 
         $form = $this->formContainerService->getForm();
-        if ($form->isSubmitted()) {
+        if (!is_null($form) && $form->isSubmitted()) {
             $formBlockMethods = $block->getFormBlockMethods();
 
             /** @var FormBlockMethodDocument $formBlockMethod */
