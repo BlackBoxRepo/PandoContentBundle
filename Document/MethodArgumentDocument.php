@@ -9,7 +9,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 class MethodArgumentDocument extends AbstractPhpcrDocument
 {
     /**
-     * @PHPCR\Integer
+     * @PHPCR\Long
      * @var integer
      **/
 	private $order;

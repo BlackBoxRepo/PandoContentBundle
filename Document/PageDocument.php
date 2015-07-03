@@ -28,7 +28,6 @@ class PageDocument extends Page
      **/
     private $formPages;
 
-
 	public function __construct()
 	{
 		$this->blocks    = new ArrayCollection();

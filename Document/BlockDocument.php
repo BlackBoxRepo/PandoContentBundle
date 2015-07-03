@@ -177,6 +177,9 @@ class BlockDocument extends AbstractBlock
      */
     public function getViewVariables()
     {
+        if (is_null($this->viewVariables)) {
+            $this->viewVariables = new ArrayCollection();
+        }
         return $this->viewVariables;
     }
 

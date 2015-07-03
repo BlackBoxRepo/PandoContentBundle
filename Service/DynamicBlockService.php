@@ -111,7 +111,7 @@ class DynamicBlockService extends BaseBlockService
         if (is_null($template)) {
             throw new MissingBlockTemplateException("Template must be defined on for block " . $block->getName());
         }
-        return $this->getTemplating()->renderResponse($template->getName(), $block->getVariables()->toArray());
+        return $this->getTemplating()->renderResponse($template->getName(), $block->getViewVariables()->toArray());
     }
 
     /**

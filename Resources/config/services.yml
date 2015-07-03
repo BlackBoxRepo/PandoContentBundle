@@ -41,6 +41,7 @@ services:
         class: "%black_box_code.pando.content_bundle.service.block_variable_service.class%"
         calls:
             - ['setMethodservice', ["@black_box_code.pando.content_bundle.service.method_service"]]
+            - ['setLogger', ["@logger"]]
     black_box_code.pando.content_bundle.twig.loader.phpcr_loader:
          class: "%black_box_code.pando.content_bundle.twig.loader.phpcr_loader.class%"
          calls:

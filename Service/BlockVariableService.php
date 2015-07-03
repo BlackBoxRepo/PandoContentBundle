@@ -4,6 +4,7 @@ namespace BlackBoxCode\Pando\ContentBundle\Service;
 use BlackBoxCode\Pando\ContentBundle\Document\BlockDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\BlockVariableDocument;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Monolog\Logger;
 
 class BlockVariableService
 {
@@ -12,6 +13,9 @@ class BlockVariableService
 
     /** @var BlockDocument */
     private $block;
+
+    /** @var Logger */
+    private $logger;
 
 
     /**
@@ -66,6 +70,7 @@ class BlockVariableService
      */
     public function setBlockVariable($key, $value)
     {
+        $this->getLogger()->addInfo("key is $key, value is $value");
         $this->getBlock()->getViewVariables()->set($key, $value);
     }
 
@@ -75,5 +80,21 @@ class BlockVariableService
     public function getBlockVariable($key)
     {
         $this->getBlock()->getViewVariables()->get($key);
+    }
+
+    /**
+     * @return Logger
+     */
+    public function getLogger()
+    {
+        return $this->logger;
+    }
+
+    /**
+     * @param Logger $logger
+     */
+    public function setLogger($logger)
+    {
+        $this->logger = $logger;
     }
 }
