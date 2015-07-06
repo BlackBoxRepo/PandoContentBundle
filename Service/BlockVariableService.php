@@ -60,7 +60,7 @@ class BlockVariableService
     {
         /** @var BlockVariableDocument $variable */
         foreach ($this->block->getVariables() as $variable) {
-            $this->setBlockVariable($variable->getName(), $this->methodService->call($variable->getMethod()));
+            $this->setBlockVariable($variable->getName(), $this->methodService->call($variable->getMethodArgument()));
         }
     }
 

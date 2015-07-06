@@ -23,8 +23,8 @@ class BlockDocument extends AbstractBlock
 	private $variables;
 
 	/**
-     * @PHPCR\Referrers(referringDocument="FormBlockMethodDocument", referencedBy="block")
-     * @var ArrayCollection<FormBlockMethodDocument>
+     * @PHPCR\Referrers(referringDocument="FormBlockMethodArgumentDocument", referencedBy="block")
+     * @var ArrayCollection<FormBlockMethodArgumentDocument>
      **/
 	private $formBlockMethods;
 
@@ -121,7 +121,7 @@ class BlockDocument extends AbstractBlock
 	}
 
 	/**
-	 * @return ArrayCollection<FormBlockMethodDocument>
+	 * @return ArrayCollection<FormBlockMethodArgumentDocument>
 	 */
 	public function getFormBlockMethods()
 	{
@@ -129,11 +129,11 @@ class BlockDocument extends AbstractBlock
 	}
 
 	/**
-	 * @param FormBlockMethodDocument $formBlockMethod
+	 * @param FormBlockMethodArgumentDocument $formBlockMethod
      *
 	 * @return $this
 	 */
-	public function addFormBlockMethod(FormBlockMethodDocument $formBlockMethod)
+	public function addFormBlockMethod(FormBlockMethodArgumentDocument $formBlockMethod)
 	{
 		$this->formBlockMethods->add($formBlockMethod);
 
@@ -141,11 +141,11 @@ class BlockDocument extends AbstractBlock
 	}
 
 	/**
-	 * @param FormBlockMethodDocument $formBlockMethod
+	 * @param FormBlockMethodArgumentDocument $formBlockMethod
      *
 	 * @return $this
 	 */
-	public function removeFormBlockMethod(FormBlockMethodDocument $formBlockMethod)
+	public function removeFormBlockMethod(FormBlockMethodArgumentDocument $formBlockMethod)
 	{
 		$this->formBlockMethods->removeElement($formBlockMethod);
 

@@ -33,13 +33,13 @@ class BlockVariableServiceTest extends \PHPUnit_Framework_TestCase
         $variable1 = new BlockVariableDocument();
         $variable1
             ->setName('variable 1')
-            ->setMethod(new MethodDocument())
+            ->setMethodArgument(new MethodDocument())
         ;
 
         $variable2 = new BlockVariableDocument();
         $variable2
             ->setName('variable 2')
-            ->setMethod(new MethodDocument())
+            ->setMethodArgument(new MethodDocument())
         ;
 
         $block = new BlockDocument();

@@ -2,7 +2,7 @@
 namespace BlackBoxCode\Pando\ContentBundle\Tests\Service;
 
 use BlackBoxCode\Pando\ContentBundle\Document\BlockDocument;
-use BlackBoxCode\Pando\ContentBundle\Document\FormBlockMethodDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\FormBlockMethodArgumentDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\FormPageDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\MethodDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\PageDocument;
@@ -105,7 +105,7 @@ class FormServiceTest extends \PHPUnit_Framework_TestCase
     public function processBlock_hasNoMethods()
     {
         $block = new BlockDocument();
-        $block->addFormBlockMethod(new FormBlockMethodDocument());
+        $block->addFormBlockMethod(new FormBlockMethodArgumentDocument());
 
         /** @var \PHPUnit_Framework_MockObject_MockObject|FormInterface $mForm */
         $mForm = $this->getMock('Symfony\Component\Form\FormInterface');
@@ -131,11 +131,11 @@ class FormServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function processBlock_hasMethods()
     {
-        $formBlockMethodDocument1 = new FormBlockMethodDocument();
-        $formBlockMethodDocument1->setMethod(new MethodDocument());
+        $formBlockMethodDocument1 = new FormBlockMethodArgumentDocument();
+        $formBlockMethodDocument1->setMethodArgument(new MethodDocument());
 
-        $formBlockMethodDocument2 = new FormBlockMethodDocument();
-        $formBlockMethodDocument2->setMethod(new MethodDocument());
+        $formBlockMethodDocument2 = new FormBlockMethodArgumentDocument();
+        $formBlockMethodDocument2->setMethodArgument(new MethodDocument());
 
         $block = new BlockDocument();
         $block

@@ -2,7 +2,7 @@
 namespace BlackBoxCode\Pando\ContentBundle\Service;
 
 use BlackBoxCode\Pando\ContentBundle\Document\BlockDocument;
-use BlackBoxCode\Pando\ContentBundle\Document\FormBlockMethodDocument;
+use BlackBoxCode\Pando\ContentBundle\Document\FormBlockMethodArgumentDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\FormDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\FormPageDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\PageDocument;
@@ -87,9 +87,9 @@ class FormService
         if (!is_null($form) && $form->isSubmitted()) {
             $formBlockMethods = $block->getFormBlockMethods();
 
-            /** @var FormBlockMethodDocument $formBlockMethod */
+            /** @var FormBlockMethodArgumentDocument $formBlockMethod */
             foreach ($formBlockMethods as $formBlockMethod) {
-                if ($method = $formBlockMethod->getMethod()) {
+                if ($method = $formBlockMethod->getMethodArgument()) {
                     $this->methodService->call($method);
 
                     if (!$hasMethods) {
@@ -107,7 +107,7 @@ class FormService
      */
     public function processFormPage(FormPageDocument $formPageDocument)
     {
-        foreach ($formPageDocument->getMethods() as $method) {
+        foreach ($formPageDocument->getMethodArguments() as $method) {
             $this->methodService->call($method);
         }
     }

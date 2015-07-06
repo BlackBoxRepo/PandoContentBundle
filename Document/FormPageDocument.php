@@ -34,15 +34,15 @@ class FormPageDocument extends AbstractPhpcrDocument
 	private $failurePage;
 
     /**
-     * @PHPCR\Referrers(referringDocument="MethodDocument", referencedBy="form")
-     * @var ArrayCollection<MethodDocument>
+     * @PHPCR\Referrers(referringDocument="MethodArgumentDocument", referencedBy="form")
+     * @var ArrayCollection<MethodArgumentDocument>
      **/
-    private $methods;
+    private $methodArguments;
 
 
     public function __construct()
     {
-        $this->methods = new ArrayCollection();
+        $this->methodArguments = new ArrayCollection();
     }
 
     /**
@@ -126,33 +126,33 @@ class FormPageDocument extends AbstractPhpcrDocument
     }
 
     /**
-     * @return ArrayCollection<MethodDocument>
+     * @return ArrayCollection<MethodArgumentDocument>
      */
-    public function getMethods()
+    public function getMethodArguments()
     {
-        return $this->methods;
+        return $this->methodArguments;
     }
 
     /**
-     * @param MethodDocument $method
+     * @param MethodArgumentDocument $method
      *
      * @return $this
      */
-    public function addMethod(MethodDocument $method)
+    public function addMethod(MethodArgumentDocument $method)
     {
-        $this->methods->add($method);
+        $this->methodArguments->add($method);
 
         return $this;
     }
 
     /**
-     * @param MethodDocument $method
+     * @param MethodArgumentDocument $method
      *
      * @return $this
      */
-    public function removeMethod(MethodDocument $method)
+    public function removeMethod(MethodArgumentDocument $methodArgument)
     {
-        $this->methods->removeElement($method);
+        $this->methodArguments->removeElement($methodArgument);
 
         return $this;
     }

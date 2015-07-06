@@ -1,6 +1,7 @@
 <?php
 namespace BlackBoxCode\Pando\ContentBundle\Tests\Service;
 
+use BlackBoxCode\Pando\ContentBundle\Document\ArgumentDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\MethodDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\MethodArgumentDocument;
 use BlackBoxCode\Pando\ContentBundle\Document\ServiceDocument;
@@ -59,7 +60,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function call_noCallbackOrValue()
     {
-        $argument = new MethodArgumentDocument();
+        $argument = new ArgumentDocument();
         $argument
             ->setOrder(0)
         ;
@@ -68,8 +69,11 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
         $method
             ->setService($this->service)
             ->setName('fooBar')
-            ->addArgument($argument)
         ;
+
+        $methodArgument = new MethodArgumentDocument();
+        $methodArgument->setMethod($method);
+        $methodArgument->addArgument($argument);
 
         $this->service->addMethod($method);
 
@@ -80,7 +84,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
             ->willReturn(new TestService())
         ;
 
-        $this->methodService->call($method);
+        $this->methodService->call($methodArgument);
     }
 
     /**
@@ -96,6 +100,9 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->service->addMethod($method);
 
+        $methodArgument = new MethodArgumentDocument();
+        $methodArgument->setMethod($method);
+
         $this->mContainer
             ->expects($this->once())
             ->method('get')
@@ -103,7 +110,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
             ->willReturn(null)
         ;
 
-        $this->methodService->call($method);
+        $this->methodService->call($methodArgument);
     }
 
     /**
@@ -120,6 +127,9 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->service->addMethod($method);
 
+        $methodArgument = new MethodArgumentDocument();
+        $methodArgument->setMethod($method);
+
         $this->mContainer
             ->expects($this->once())
             ->method('get')
@@ -127,7 +137,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
             ->willReturn($this->mTestService)
         ;
 
-        $this->methodService->call($method);
+        $this->methodService->call($methodArgument);
     }
 
     /**
@@ -150,13 +160,16 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->service->addMethod($method);
 
+        $methodArgument = new MethodArgumentDocument();
+        $methodArgument->setMethod($method);
+
         $this->mTestService
             ->expects($this->once())
             ->method('foo')
             ->willReturn('abc')
         ;
 
-        $return = $this->methodService->call($method);
+        $return = $this->methodService->call($methodArgument);
         $this->assertEquals('abc', $return);
     }
 
@@ -166,7 +179,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function call_methodHasTooFewArguments()
     {
-        $argument = new MethodArgumentDocument();
+        $argument = new ArgumentDocument();
         $argument
             ->setOrder(0)
             ->setValue(2)
@@ -176,10 +189,13 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
         $method
             ->setService($this->service)
             ->setName('bar')
-            ->addArgument($argument)
         ;
 
         $this->service->addMethod($method);
+
+        $methodArgument = new MethodArgumentDocument();
+        $methodArgument->setMethod($method);
+        $methodArgument->addArgument($argument);
 
         $this->mContainer
             ->expects($this->once())
@@ -188,7 +204,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
             ->willReturn($this->mTestService)
         ;
 
-        $this->methodService->call($method);
+        $this->methodService->call($methodArgument);
     }
 
     /**
@@ -197,25 +213,25 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function call_methodHasTooManyArguments()
     {
-        $argument1 = new MethodArgumentDocument();
+        $argument1 = new ArgumentDocument();
         $argument1
             ->setOrder(0)
             ->setValue(2)
         ;
 
-        $argument2 = new MethodArgumentDocument();
+        $argument2 = new ArgumentDocument();
         $argument2
             ->setOrder(1)
             ->setValue(2)
         ;
 
-        $argument3 = new MethodArgumentDocument();
+        $argument3 = new ArgumentDocument();
         $argument3
             ->setOrder(2)
             ->setValue(2)
         ;
 
-        $argument4 = new MethodArgumentDocument();
+        $argument4 = new ArgumentDocument();
         $argument4
             ->setOrder(3)
             ->setValue(2)
@@ -225,13 +241,16 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
         $method
             ->setService($this->service)
             ->setName('bar')
-            ->addArgument($argument1)
-            ->addArgument($argument2)
-            ->addArgument($argument3)
-            ->addArgument($argument4)
         ;
 
         $this->service->addMethod($method);
+
+        $methodArgument = new MethodArgumentDocument();
+        $methodArgument->setMethod($method);
+        $methodArgument->addArgument($argument1);
+        $methodArgument->addArgument($argument2);
+        $methodArgument->addArgument($argument3);
+        $methodArgument->addArgument($argument4);
 
         $this->mContainer
             ->expects($this->once())
@@ -240,7 +259,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
             ->willReturn($this->mTestService)
         ;
 
-        $this->methodService->call($method);
+        $this->methodService->call($methodArgument);
     }
 
     /**
@@ -249,14 +268,14 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
     public function call_methodHasCorrectNumberOfRequiredArguments()
     {
         $argument1Value = 2;
-        $argument1 = new MethodArgumentDocument();
+        $argument1 = new ArgumentDocument();
         $argument1
             ->setOrder(0)
             ->setValue($argument1Value)
         ;
 
         $argument2Value = 15;
-        $argument2 = new MethodArgumentDocument();
+        $argument2 = new ArgumentDocument();
         $argument2
             ->setOrder(1)
             ->setValue($argument2Value);
@@ -265,11 +284,14 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
         $method
             ->setService($this->service)
             ->setName('bar')
-            ->addArgument($argument1)
-            ->addArgument($argument2)
         ;
 
         $this->service->addMethod($method);
+
+        $methodArgument = new MethodArgumentDocument();
+        $methodArgument->setMethod($method);
+        $methodArgument->addArgument($argument1);
+        $methodArgument->addArgument($argument2);
 
         $this->mContainer
             ->expects($this->once())
@@ -278,7 +300,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
             ->willReturn(new TestService())
         ;
 
-        $return = $this->methodService->call($method);
+        $return = $this->methodService->call($methodArgument);
         $this->assertEquals($argument1Value + $argument2Value + 10, $return);
     }
 
@@ -288,7 +310,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function call_methodArgumentIsOfWrongType()
     {
-        $argument = new MethodArgumentDocument();
+        $argument = new ArgumentDocument();
         $argument
             ->setOrder(0)
             ->setValue(2)
@@ -298,10 +320,13 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
         $method
             ->setService($this->service)
             ->setName('fooBar')
-            ->addArgument($argument)
         ;
 
         $this->service->addMethod($method);
+
+        $methodArgument = new MethodArgumentDocument();
+        $methodArgument->setMethod($method);
+        $methodArgument->addArgument($argument);
 
         $this->mContainer
             ->expects($this->once())
@@ -310,7 +335,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
             ->willReturn(new TestService())
         ;
 
-        $this->methodService->call($method);
+        $this->methodService->call($methodArgument);
     }
 
     /**
@@ -324,13 +349,17 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
             ->setName('barFoo')
         ;
 
-        $argument1 = new MethodArgumentDocument();
+        $methodArgumentCallback = new MethodArgumentDocument();
+        $methodArgumentCallback->setMethod($callback);
+
+        $argument1 = new ArgumentDocument();
         $argument1
             ->setOrder(0)
-            ->setCallback($callback)
+            ->setCallback($methodArgumentCallback)
         ;
 
-        $argument2 = new MethodArgumentDocument();
+
+        $argument2 = new ArgumentDocument();
         $argument2
             ->setOrder(1)
             ->setValue(20)
@@ -340,14 +369,17 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
         $method
             ->setService($this->service)
             ->setName('bar')
-            ->addArgument($argument1)
-            ->addArgument($argument2)
         ;
 
         $this->service
             ->addMethod($method)
             ->addMethod($callback)
         ;
+
+        $methodArgument = new MethodArgumentDocument();
+        $methodArgument->setMethod($method);
+        $methodArgument->addArgument($argument1);
+        $methodArgument->addArgument($argument2);
 
         $this->mContainer
             ->expects($this->exactly(2))
@@ -356,7 +388,7 @@ class MethodServiceTest extends \PHPUnit_Framework_TestCase
             ->willReturn(new TestService())
         ;
 
-        $return = $this->methodService->call($method);
+        $return = $this->methodService->call($methodArgument);
         $this->assertEquals(130, $return);
     }
 }

@@ -21,13 +21,6 @@ class MethodDocument extends AbstractPhpcrDocument
      **/
 	private $service;
 
-    /**
-     * @PHPCR\Referrers(referringDocument="MethodArgumentDocument", referencedBy="method")
-     * @var ArrayCollection<MethodArgumentDocument>
-     **/
-	private $arguments;
-
-
     public function __construct()
     {
         $this->arguments = new ArrayCollection();
@@ -69,46 +62,6 @@ class MethodDocument extends AbstractPhpcrDocument
     public function setService(ServiceDocument $service)
     {
         $this->service = $service;
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection<MethodArgumentDocument>
-     */
-    public function getArguments()
-    {
-        $iterator = $this->arguments->getIterator();
-
-        $iterator->uasort(
-            function ($a, $b) {
-                return ($a->getOrder() < $b->getOrder()) ? -1 : 1;
-            }
-        );
-
-        return new ArrayCollection(array_values(iterator_to_array($iterator)));
-    }
-
-    /**
-     * @param MethodArgumentDocument $argument
-     *
-     * @return $this
-     */
-    public function addArgument(MethodArgumentDocument $argument)
-    {
-        $this->arguments->add($argument);
-
-        return $this;
-    }
-
-    /**
-     * @param MethodArgumentDocument $argument
-     *
-     * @return $this
-     */
-    public function removeArgument(MethodArgumentDocument $argument)
-    {
-        $this->arguments->removeElement($argument);
 
         return $this;
     }

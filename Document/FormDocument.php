@@ -16,15 +16,15 @@ class FormDocument extends AbstractPhpcrDocument
     private $name;
 
     /**
-     * @PHPCR\Referrers(referringDocument="FormBlockMethodDocument", referencedBy="form")
-     * @var ArrayCollection<FormBlockMethodDocument>
+     * @PHPCR\Referrers(referringDocument="FormBlockMethodArgumentDocument", referencedBy="form")
+     * @var ArrayCollection<FormBlockMethodArgumentDocument>
      **/
-    private $formBlockMethods;
+    private $formBlockMethodArguments;
 
 
     public function __construct()
     {
-        $this->formBlockMethods = new ArrayCollection();
+        $this->formBlockMethodArguments = new ArrayCollection();
         $this->submitted = false;
     }
 
@@ -48,33 +48,33 @@ class FormDocument extends AbstractPhpcrDocument
 	}
 
     /**
-     * @return ArrayCollection<FormBlockMethodDocument>
+     * @return ArrayCollection<FormBlockMethodArgumentDocument>
      */
-    public function getFormBlockMethods()
+    public function getFormBlockMethodArguments()
     {
-        return $this->formBlockMethods;
+        return $this->formBlockMethodArguments;
     }
 
     /**
-     * @param FormBlockMethodDocument $formBlockMethod
+     * @param FormBlockMethodArgumentDocument $formBlockMethod
      *
      * @return $this
      */
-    public function addFormBlockMethod(FormBlockMethodDocument $formBlockMethod)
+    public function addFormBlockMethod(FormBlockMethodArgumentDocument $formBlockMethod)
     {
-        $this->formBlockMethods->add($formBlockMethod);
+        $this->formBlockMethodArguments->add($formBlockMethod);
 
         return $this;
     }
 
     /**
-     * @param FormBlockMethodDocument $formBlockMethod
+     * @param FormBlockMethodArgumentDocument $formBlockMethod
      *
      * @return $this
      */
-    public function removeFormBlockMethod(FormBlockMethodDocument $formBlockMethod)
+    public function removeFormBlockMethod(FormBlockMethodArgumentDocument $formBlockMethod)
     {
-        $this->formBlockMethods->removeElement($formBlockMethod);
+        $this->formBlockMethodArguments->removeElement($formBlockMethod);
 
         return $this;
     }

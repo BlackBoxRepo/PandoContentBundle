@@ -1,6 +1,7 @@
 <?php
 namespace BlackBoxCode\Pando\ContentBundle\Document;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 
 /**
@@ -9,68 +10,20 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 class MethodArgumentDocument extends AbstractPhpcrDocument
 {
     /**
-     * @PHPCR\Long
-     * @var integer
-     **/
-	private $order;
-
-    /**
-     * @PHPCR\String
-     * @var string
-     **/
-    private $value;
-
-    /**
      * @PHPCR\ReferenceOne(targetDocument="MethodDocument", strategy="hard")
      * @var MethodDocument
      **/
 	private $method;
 
     /**
-     * @PHPCR\ReferenceOne(targetDocument="MethodDocument", strategy="hard")
-     * @var MethodDocument
+     * @PHPCR\ReferenceMany(targetDocument="ArgumentDocument", strategy="hard")
+     * @var ArrayCollection<ArgumentDocument>
      **/
-	private $callback;
+	private $arguments;
 
-
-    /**
-     * @return int
-     */
-    public function getOrder()
+    public function __construct()
     {
-        return $this->order;
-    }
-
-    /**
-     * @param int $order
-     *
-     * @return $this
-     */
-    public function setOrder($order)
-    {
-        $this->order = $order;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-
-        return $this;
+        $this->arguments = new ArrayCollection();
     }
 
     /**
@@ -94,22 +47,26 @@ class MethodArgumentDocument extends AbstractPhpcrDocument
     }
 
     /**
-     * @return MethodDocument
+     * @return ArrayCollection
      */
-    public function getCallback()
+    public function getArguments()
     {
-        return $this->callback;
+        return $this->arguments;
     }
 
     /**
-     * @param MethodDocument $callback
-     *
-     * @return $this
+     * @param ArrayCollection $arguments
      */
-    public function setCallback(MethodDocument $callback)
+    public function setArguments($arguments)
     {
-        $this->callback = $callback;
+        $this->arguments = $arguments;
+    }
 
-        return $this;
+    /**
+     * @param ArgumentDocument $argument
+     */
+    public function addArgument(ArgumentDocument $argument)
+    {
+        $this->getArguments()->add($argument);
     }
 }

@@ -6,7 +6,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class FormBlockMethodDocument extends AbstractPhpcrDocument
+class FormBlockMethodArgumentDocument extends AbstractPhpcrDocument
 {
     /**
      * @PHPCR\ReferenceOne(targetDocument="FormDocument", strategy="hard")
@@ -21,10 +21,10 @@ class FormBlockMethodDocument extends AbstractPhpcrDocument
 	private $block;
 
     /**
-     * @PHPCR\ReferenceOne(targetDocument="MethodDocument", strategy="hard")
-     * @var MethodDocument
+     * @PHPCR\ReferenceOne(targetDocument="MethodArgumentDocument", strategy="hard")
+     * @var MethodArgumentDocument
      **/
-	private $method;
+	private $methodArgument;
 
 
 	/**
@@ -70,19 +70,19 @@ class FormBlockMethodDocument extends AbstractPhpcrDocument
     /**
      * @return MethodDocument
      */
-    public function getMethod()
+    public function getMethodArgument()
     {
-        return $this->method;
+        return $this->methodArgument;
     }
 
     /**
-     * @param MethodDocument $method
+     * @param MethodDocument $methodArgument
      *
      * @return $this
      */
-    public function setMethod(MethodDocument $method)
+    public function setMethodArgument(MethodDocument $methodArgument)
     {
-        $this->method = $method;
+        $this->methodArgument = $methodArgument;
 
         return $this;
     }
